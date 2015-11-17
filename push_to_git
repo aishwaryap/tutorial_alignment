@@ -5,4 +5,4 @@ rm -f ingredients/*~
 rm -f recipes/*~
 git add -A
 git commit -m "$*"
-git push origin aishwarya
+git push origin master
