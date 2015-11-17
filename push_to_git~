@@ -1,0 +1,4 @@
+rm -f hmm/recipe/*.pyc
+rm -f ingredients/*~
+rm -f recipes/*~
+

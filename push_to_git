@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+rm -f hmm/recipe/*.pyc
+rm -f ingredients/*~
+rm -f recipes/*~
+git add -A
+git commit -m "$*"
+git push origin aishwarya
