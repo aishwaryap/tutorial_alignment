@@ -4,7 +4,7 @@ This code is based on:
  - A Tutorial on Hidden Markov Models and Selected Applications in Speech Recognition, LR RABINER 1989 
 '''
 
-import numpy
+import numpy, sys
 
 class RecipeHMM :
     
@@ -17,10 +17,11 @@ class RecipeHMM :
         
         self.A = A
         self.pi = pi
-        self.uni = dict()
-        self.uni['-UNK-'] = 1.0
-        self.bi = dict()
-        self.bi['-UNK-'] = 1.0
+        
+        unk_dict = {'-UNK-':1.0}
+        
+        self.uni = [unk_dict] * self.n
+        self.bi = [unk_dict] * self.n
 
     def _eta1(self,t,T):
         '''
@@ -31,23 +32,27 @@ class RecipeHMM :
         return 1.
     
     def calc_uni(self, j, w) :
-        if w in uni[j] :
-            return uni[j][w]
+        #print 'In calc_uni(', j, ', ', w, ')'
+        if w in self.uni[j] :
+            #print 'Returning ', self.uni[j][w]
+            return self.uni[j][w]
         else :
-            return uni[j]['-UNK-']
+            #print 'Returning ', self.uni[j]['-UNK-']
+            return self.uni[j]['-UNK-']
     
     def calc_bi(self, j, w1, w2) :
-        if (w1, w2) in bi[j] :
-            return bi[j][(w1, w2)]
+        if (w1, w2) in self.bi[j] :
+            return self.bi[j][(w1, w2)]
         else :
-            return bi[j]['-UNK-']
+            return self.bi[j]['-UNK-']
     
     
     # o = [w_1, w_2 ... w_n]
     # b_j(o) = Pr()  
     def calc_b(self, j, o) :
+        b = 1.0
         for i in xrange(len(o)) :
-            b *= (self.calc_bi(j, o[i-1], o[i]) / self.calc_uni(j, o[i-1])
+            b *= self.calc_bi(j, o[i-1], o[i]) / self.calc_uni(j, o[i-1])
         return b    
             
     def forwardbackward(self, observations, cache=False):
@@ -65,7 +70,8 @@ class RecipeHMM :
         '''
         if (cache==False):
             print 'Using b values from only one observation. This should not happen!'
-            self._mapB([observations])
+            sys.exit(1)
+            #self._mapB([observations])
         
         alpha = self._calcalpha(observations)
         # Pr(O/params) = \sum_i(\alpha_T(i))
@@ -87,6 +93,10 @@ class RecipeHMM :
         
         # init stage - alpha_1(x) = pi(x)b_x(O1)
         for x in xrange(self.n):
+            #print alpha[0][x]
+            #print 'self.pi = ', self.pi
+            #print 'self.n = ', self.n
+            #print self.calc_b(x, observations[0])
             alpha[0][x] = self.pi[x] * self.calc_b(x, observations[0])
         
         # induction
@@ -256,7 +266,7 @@ class RecipeHMM :
         'thres' denotes the algorithms sensitivity to the log likelihood decreasing
         from one iteration to the other.
         '''        
-        self._mapB(observations)
+        #self._mapB(observations)
         
         for i in xrange(iterations):
             prob_old, prob_new = self.trainiter(observations)
@@ -299,7 +309,8 @@ class RecipeHMM :
         self._updatemodel(new_model)
         
         # Recalculate b
-        self._mapB(observations)
+        stats = self._calcstats(observations)
+        self._mapB(observations, stats)
         
         # calculate the log likelihood of the new model. Cache set to false in order to recompute probabilities of the observations give the model.
         prob_new = 0.0
@@ -342,6 +353,8 @@ class RecipeHMM :
         
         Returns 'stat's, a dictionary containing required statistics.
         '''
+        #print 'In _calcstats'
+        
         stats = dict()
         stats['alpha'] = list()
         stats['beta'] = list()
@@ -395,16 +408,22 @@ class RecipeHMM :
         '''
         observations is a list of observation sequences
         '''
+        #print 'In _mapB'
         self.uni = [dict()] * self.n
         self.bi = [dict()] * self.n
-        for (k, observation) in enumerate(observations) :
-            for (t, phrase) in enumerate(observation) :
-                # Assuming observation is a list of unigrams
-                unigrams = ['<s>'] + phrase + ['</s>']
-                bigrams = zip(unigrams, unigrams[1:])
-                for j in xrange(self.n) :
-                    sum_uni = 0.0
-                    sum_bi = 0.0
+        
+        for j in xrange(self.n) :
+            sum_uni = 0.0
+            sum_bi = 0.0
+            for (k, observation) in enumerate(observations) :
+                for (t, phrase) in enumerate(observation) :
+                    # Assuming observation is a list of unigrams
+                    unigrams = ['<s>'] + phrase + ['</s>']
+                    bigrams = zip(unigrams, unigrams[1:])
+                    
+                    #print 'unigrams = ', unigrams
+                    #print 'bigrams = ', bigrams
+                    
                     for unigram in unigrams :
                         if unigram in self.uni[j] :
                             self.uni[j][unigram] += stats['gamma'][k][t][j]
@@ -412,7 +431,7 @@ class RecipeHMM :
                             self.uni[j][unigram] = stats['gamma'][k][t][j]
                         sum_uni += stats['gamma'][k][t][j]
                     # TODO: Recheck the correct way to init this
-                    self.uni[j]['-UNK-'] = 1
+                    self.uni[j]['-UNK-'] = 0.01
                     sum_uni += self.uni[j]['-UNK-']
                     for bigram in bigrams :
                         if bigram in self.bi[j] :
@@ -420,13 +439,35 @@ class RecipeHMM :
                         else :
                             self.bi[j][bigram] = stats['gamma'][k][t][j]
                         sum_bi += stats['gamma'][k][t][j]
-                    self.bi[j]['-UNK-'] = 1
+                    self.bi[j]['-UNK-'] = 0.01
                     sum_bi += self.bi[j]['-UNK-']
                     
-                    for unigram in self.uni[j] :
-                        self.uni[j][unigram] /= sum_uni
-                    for bigram in bi[j] :
-                        self.bi[j][bigram] /= sum_bi
-                
+            #print 'self.uni[', j, '] = ', self.uni[j]
+            #print 'self.bi[', j, '] = ', self.bi[j]
+            
+            remove_uni = []        
+            for unigram in self.uni[j] :
+                if self.uni[j][unigram] < 0.00000000001 :
+                    remove_uni.append(unigram)
+                else :
+                    self.uni[j][unigram] /= sum_uni
+            remove_bi = []
+            for bigram in self.bi[j] :
+                if self.bi[j][bigram] < 0.00000000001 :
+                    remove_bi.append(bigram)
+                else :
+                    self.bi[j][bigram] /= sum_bi
+            for unigram in remove_uni:
+                del self.uni[j][unigram]
+            for bigram in remove_bi :
+                del self.bi[j][bigram]
+            
+            #print
+            #print 'After normalization'
+            #print 'self.uni[', j, '] = ', self.uni[j]
+            #print 'self.bi[', j, '] = ', self.bi[j]
         
-        
+        #print '\n\n'        
+        #print 'self.uni = ', self.uni
+        #print 'self.bi = ', self.bi
+        #x = raw_input()
