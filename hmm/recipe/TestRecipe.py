@@ -1,40 +1,63 @@
-import numpy, json, sys
-from pprint import pprint
-from nltk.tree import Tree
+import numpy
+from os import listdir
+from os.path import isfile, join
 
-from RecipeHMM import RecipeHMM
+from Preprocess import *
 
-sys.path.insert(0, '../../stanford-corenlp-python')
-from jsonrpc import ServerProxy, JsonRpc20, TransportTcpIp
-
-class StanfordNLP:
-    def __init__(self):
-        self.server = ServerProxy(JsonRpc20(),
-                                  TransportTcpIp(addr=("127.0.0.1", 8080)))
+def basic_test() :
+    observations = [[['a', 'cat'],['hello']],[['it', 'is', 'warm'],['a', 'dog'],['hello']]]
     
-    def parse(self, text):
-        return json.loads(self.server.parse(text))  
+    atmp = numpy.random.random_sample((2, 2))
+    row_sums = atmp.sum(axis=1)
+    a = atmp / row_sums[:, numpy.newaxis]    
+
+    pitmp = numpy.random.random_sample((2))
+    pi = pitmp / sum(pitmp)
+    
+    hmm = RecipeHMM(2, pi, a)
+    hmm.train(observations, 100)
+    print "Pi", hmm.pi
+    print "A", hmm.A
+    print "uni", hmm.uni
+    print "bi", hmm.bi
+
+train_recipes_dir = '../../recipes'
+train_ingredients_dir = '../../ingredients'
+
+test_recipes_dir = '../../test/recipes'
+test_ingredients_dir = '../../test/ingredients'
 
 def test():
-    nlp = StanfordNLP()
-    text = 'Hi, my name is Aishwarya. I am testing whether this works.'
-    parse = nlp.parse(text)
-    print parse[u'sentences'][0].keys()
-    print [str(word[0]) for word in parse[u'sentences'][0][u'words']]
-
-    #observations = [[['a', 'cat'],['hello']],[['it', 'is', 'warm'],['a', 'dog'],['hello']]]
+    (recipes, filenames) = preprocess(train_recipes_dir)
+    print 'Completed preprocessing'
+    print 'Train files :', filenames
+    #recipes = recipes + recipes
+    #temp = list()
+    #temp.append(recipes[1])
+    #temp.append(recipes[0])
+    #recipes = temp
+    n = len(recipes[0])
     
-    #atmp = numpy.random.random_sample((2, 2))
-    #row_sums = atmp.sum(axis=1)
-    #a = atmp / row_sums[:, numpy.newaxis]    
+    atmp = numpy.random.random_sample((n, n))
+    row_sums = atmp.sum(axis=1)
+    a = atmp / row_sums[:, numpy.newaxis]    
 
-    #pitmp = numpy.random.random_sample((2))
-    #pi = pitmp / sum(pitmp)
+    pitmp = numpy.random.random_sample((n))
+    pi = pitmp / sum(pitmp)
     
-    #hmm = RecipeHMM(2, pi, a)
-    #hmm.train(observations, 100)
+    hmm = RecipeHMM(n, pi, a)
+    hmm.train(recipes, 10)
     #print "Pi", hmm.pi
     #print "A", hmm.A
+
+    (recipes, filenames) = preprocess(test_recipes_dir)
+    filenames_with_recipes = zip(filenames, recipes)
+    filenames_with_recipes.sort()
+    for (filename, recipe) in filenames_with_recipes :
+        print filename, ':',  hmm.forwardbackward(recipe, cache=True)    
+
+    
+    
     #print "uni", hmm.uni
     #print "bi", hmm.bi
 
