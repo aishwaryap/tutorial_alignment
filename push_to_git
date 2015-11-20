@@ -4,6 +4,10 @@ rm -f *~
 rm -f hmm/recipe/*.pyc
 rm -f ingredients/*~
 rm -f recipes/*~
+rm -f *~
+rm -f test/ingredients/*~
+rm -f test/recipes/*~
+rm -f test/dish_names/*~
 git add -A
 git commit -m "$*"
 git push origin master
