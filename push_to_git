@@ -10,4 +10,5 @@ rm -f test/recipes/*~
 rm -f test/dish_names/*~
 git add -A
 git commit -m "$*"
+git pull origin master
 git push origin master

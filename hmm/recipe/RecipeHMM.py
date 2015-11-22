@@ -8,7 +8,7 @@ import numpy, sys
 
 class RecipeHMM :
     
-    def __init__(self, n, pi=None, A=None, precision=numpy.double, verbose=False):
+    def __init__(self, n, pi=None, A=None, precision=numpy.longdouble, verbose=False):
         self.n = n
         
         self.precision = precision

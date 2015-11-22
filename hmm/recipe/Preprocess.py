@@ -20,7 +20,7 @@ class StanfordNLP:
         return json.loads(self.server.parse(text))  
 
 
-# TODO: Remove non-ASCII characters from text before gving to stanford corenlp
+# TODO: Look for blank lines and make sure they don't create errors
 
 verb_pos_tags = ['VBG', 'VBN', 'VBD', 'VBP', 'VBZ', 'VB']
 adj_pos_tags = ['JJ', 'JJR', 'JJS']
