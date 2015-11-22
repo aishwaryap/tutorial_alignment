@@ -53,7 +53,7 @@ def remove_non_ascii_chars(text) :
 def preprocess(recipes_dirs) :
     recipefiles = []
     for recipes_dir in recipes_dirs :
-        recipefiles = [ f for f in listdir(recipes_dir) if isfile(join(recipes_dir,f)) ]
+        recipefiles = [ recipes_dir + '/' + f for f in listdir(recipes_dir) if isfile(join(recipes_dir,f)) ]
     nlp = StanfordNLP()
     lmtzr = WordNetLemmatizer()
     recipes = list()
@@ -61,7 +61,7 @@ def preprocess(recipes_dirs) :
     for filename in recipefiles :
         if filename.endswith('.txt') :
             print 'Preprocessing ', filename
-            f = open(recipes_dir + '/' + filename)
+            f = open(filename)
             text = f.read()
             lines = text.split('\n')
             text = ' '.join(lines)
