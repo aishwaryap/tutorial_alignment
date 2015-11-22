@@ -50,8 +50,10 @@ def lemmatize(lmtzr, word, pos) :
 def remove_non_ascii_chars(text) :
     return ''.join([i if ord(i) < 128 else ' ' for i in text])
 
-def preprocess(recipes_dir) :
-    recipefiles = [ f for f in listdir(recipes_dir) if isfile(join(recipes_dir,f)) ]
+def preprocess(recipes_dirs) :
+    recipefiles = []
+    for recipes_dir in recipes_dirs :
+        recipefiles = [ f for f in listdir(recipes_dir) if isfile(join(recipes_dir,f)) ]
     nlp = StanfordNLP()
     lmtzr = WordNetLemmatizer()
     recipes = list()

@@ -21,14 +21,14 @@ def basic_test() :
     print "uni", hmm.uni
     print "bi", hmm.bi
 
-train_recipes_dir = '../../recipes'
-train_ingredients_dir = '../../ingredients'
+train_recipes_dirs = ['../../data/pbnj/recipes']
+train_ingredients_dir = ['../../data/pbnj/ingredients']
 
-test_recipes_dir = '../../test/recipes'
-test_ingredients_dir = '../../test/ingredients'
+test_recipes_dirs = ['../../data/pbnj/recipes', '../../data/chocolate_cake/recipes']
+test_ingredients_dir = ['../../data/pbnj/ingredients', '../../data/chocolate_cake/ingredients']
 
 def test():
-    (recipes, filenames) = preprocess(train_recipes_dir)
+    (recipes, filenames) = preprocess(train_recipes_dirs)
     print 'Completed preprocessing'
     print 'Train files :', filenames
     #recipes = recipes + recipes
@@ -50,7 +50,7 @@ def test():
     #print "Pi", hmm.pi
     #print "A", hmm.A
 
-    (recipes, filenames) = preprocess(test_recipes_dir)
+    (recipes, filenames) = preprocess(test_recipes_dirs)
     filenames_with_recipes = zip(filenames, recipes)
     filenames_with_recipes.sort()
     for (filename, recipe) in filenames_with_recipes :
