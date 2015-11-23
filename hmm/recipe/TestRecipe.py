@@ -1,4 +1,4 @@
-import numpy
+import numpy, sys
 from os import listdir
 from os.path import isfile, join
 
@@ -55,8 +55,6 @@ def test():
     filenames_with_recipes.sort()
     for (filename, recipe) in filenames_with_recipes :
         print filename, ':',  hmm.forwardbackward(recipe, cache=True)    
-
-    
     
     #print "uni", hmm.uni
     #print "bi", hmm.bi
