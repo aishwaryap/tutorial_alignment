@@ -1,4 +1,4 @@
-import json, sys, re
+import json, sys, re, time
 from pprint import pprint
 from nltk.tree import Tree
 from os import listdir
@@ -9,7 +9,7 @@ from nltk.stem.wordnet import WordNetLemmatizer
 from RecipeHMM import RecipeHMM
 
 sys.path.insert(0, '../../stanford-corenlp-python')
-from jsonrpc import ServerProxy, JsonRpc20, TransportTcpIp
+from jsonrpc import ServerProxy, JsonRpc20, TransportTcpIp, RPCTransportError
 
 class StanfordNLP:
     def __init__(self):
@@ -53,7 +53,8 @@ def remove_non_ascii_chars(text) :
 def preprocess(recipes_dirs) :
     recipefiles = []
     for recipes_dir in recipes_dirs :
-        recipefiles = [ recipes_dir + '/' + f for f in listdir(recipes_dir) if isfile(join(recipes_dir,f)) ]
+        print 'recipes_dir = ', recipes_dir
+        recipefiles = recipefiles + [ recipes_dir + '/' + f for f in listdir(recipes_dir) if isfile(join(recipes_dir,f)) ]
     nlp = StanfordNLP()
     lmtzr = WordNetLemmatizer()
     recipes = list()
@@ -63,21 +64,35 @@ def preprocess(recipes_dirs) :
             print 'Preprocessing ', filename
             f = open(filename)
             text = f.read()
-            lines = text.split('\n')
-            text = ' '.join(lines)
-            text = remove_non_ascii_chars(text)
+            parts = list()
+            if len(text) > 3000 :
+                paras = text.split('\n')
+                idx = 0
+                while idx < len(paras) :
+                    part = ''
+                    while len(part) < 1500 and idx < len(paras) :
+                        part = part + paras[idx] + '\n'
+                        idx += 1
+                    parts.append(part.strip())
+            else :
+                parts = [text]
+
             f.close()
-            parse = nlp.parse(text.strip())
-            phrases = list()
-            for sentence_object in parse[u'sentences'] :
-                #tree = Tree.parse(sentence_object[u'parsetree'])
-                #pprint(tree)
-                sentence = [str(word[0]).lower() for word in sentence_object[u'words']]
-                pos = [str(word[1][u'PartOfSpeech']) for word in sentence_object[u'words']]
-                word_pos = zip(sentence, pos)
-                lemmatized_sentence = [lemmatize(lmtzr, word, pos) for (word, pos) in word_pos] 
-                only_words = get_only_words(lemmatized_sentence)
-                phrases.append(only_words)
+            phrases = list()    
+            for part in parts :
+                lines = part.split('\n')
+                text = ' '.join(lines)
+                text = remove_non_ascii_chars(text)
+                parse = nlp.parse(text.strip())
+                for sentence_object in parse[u'sentences'] :
+                    #tree = Tree.parse(sentence_object[u'parsetree'])
+                    #pprint(tree)
+                    sentence = [str(word[0]).lower() for word in sentence_object[u'words']]
+                    pos = [str(word[1][u'PartOfSpeech']) for word in sentence_object[u'words']]
+                    word_pos = zip(sentence, pos)
+                    lemmatized_sentence = [lemmatize(lmtzr, word, pos) for (word, pos) in word_pos] 
+                    only_words = get_only_words(lemmatized_sentence)
+                    phrases.append(only_words)
             recipes.append(phrases)
             filenames.append(filename)
     return (recipes, filenames)        
