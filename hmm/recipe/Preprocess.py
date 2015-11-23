@@ -20,8 +20,6 @@ class StanfordNLP:
         return json.loads(self.server.parse(text))  
 
 
-# TODO: Look for blank lines and make sure they don't create errors
-
 verb_pos_tags = ['VBG', 'VBN', 'VBD', 'VBP', 'VBZ', 'VB']
 adj_pos_tags = ['JJ', 'JJR', 'JJS']
 noun_pos_tags = ['NN', 'NNS', 'NNP', 'NNPS']

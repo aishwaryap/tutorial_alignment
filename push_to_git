@@ -2,12 +2,15 @@
 
 rm -f *~
 rm -f hmm/recipe/*.pyc
-rm -f ingredients/*~
-rm -f recipes/*~
 rm -f *~
-rm -f test/ingredients/*~
-rm -f test/recipes/*~
-rm -f test/dish_names/*~
+rm -f data/omlette/ingredients/*~
+rm -f data/omlette/recipes/*~
+rm -f data/pbnj/ingredients/*~
+rm -f data/pbnj/recipes/*~
+rm -f data/chocolate_cake/ingredients/*~
+rm -f data/chocolate_cake/recipes/*~
+rm -f data/biriyani/ingredients/*~
+rm -f data/biriyani/recipes/*~
 git add -A
 git commit -m "$*"
 git pull origin master
