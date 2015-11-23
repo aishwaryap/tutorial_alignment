@@ -21,11 +21,10 @@ def basic_test() :
     print "uni", hmm.uni
     print "bi", hmm.bi
 
-train_recipes_dirs = ['../../data/pbnj/recipes']
-train_ingredients_dir = ['../../data/pbnj/ingredients']
+train_recipes_dirs = ['../../train']
+#train_recipes_dirs = ['../../trial']
 
-test_recipes_dirs = ['../../data/pbnj/recipes', '../../data/chocolate_cake/recipes']
-test_ingredients_dir = ['../../data/pbnj/ingredients', '../../data/chocolate_cake/ingredients']
+test_recipes_dirs = ['../../test/pbnj/recipes', '../../test/chocolate_cake/recipes']
 
 def test():
     (recipes, filenames) = preprocess(train_recipes_dirs)
