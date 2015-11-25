@@ -25,11 +25,11 @@ adj_pos_tags = ['JJ', 'JJR', 'JJS']
 noun_pos_tags = ['NN', 'NNS', 'NNP', 'NNPS']
 adv_pos_tags = ['RB', 'RBR', 'RBS']
 
-delete_list = ['-rrb-', '-lrb-']
+delete_list = ['-rrb-', '-lrb-', '-RRB-', '-LRB-']
 
 def get_only_words(sentence) :
     regex = re.compile('.*[a-zA-Z0-9].*')
-    only_words = [token.lower() for token in sentence if regex.match(token) and token not in delete_list]
+    only_words = [(token.lower(), pos) for (token, pos) in sentence if regex.match(token) and token not in delete_list]
     return only_words
 
 def lemmatize(lmtzr, word, pos) :
@@ -57,6 +57,7 @@ def preprocess(recipes_dirs) :
     lmtzr = WordNetLemmatizer()
     recipes = list()
     filenames = list()
+    orig_recipe_texts = list()
     for filename in recipefiles :
         if filename.endswith('.txt') :
             print 'Preprocessing ', filename
@@ -77,6 +78,7 @@ def preprocess(recipes_dirs) :
 
             f.close()
             phrases = list()    
+            orig_recipe_text = list()
             for part in parts :
                 lines = part.split('\n')
                 text = ' '.join(lines)
@@ -86,11 +88,15 @@ def preprocess(recipes_dirs) :
                     #tree = Tree.parse(sentence_object[u'parsetree'])
                     #pprint(tree)
                     sentence = [str(word[0]).lower() for word in sentence_object[u'words']]
+                    cur_orig_text = ' '.join([str(word[0]) for word in sentence_object[u'words']])
+                    orig_recipe_text.append(cur_orig_text)
                     pos = [str(word[1][u'PartOfSpeech']) for word in sentence_object[u'words']]
                     word_pos = zip(sentence, pos)
                     lemmatized_sentence = [lemmatize(lmtzr, word, pos) for (word, pos) in word_pos] 
-                    only_words = get_only_words(lemmatized_sentence)
+                    lemmatized_sentence_with_pos = zip(lemmatized_sentence, pos)
+                    only_words = get_only_words(lemmatized_sentence_with_pos)
                     phrases.append(only_words)
             recipes.append(phrases)
+            orig_recipe_texts.append(orig_recipe_text)
             filenames.append(filename)
-    return (recipes, filenames)        
+    return (recipes, filenames, orig_recipe_texts)        

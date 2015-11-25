@@ -3,6 +3,7 @@ from os import listdir
 from os.path import isfile, join
 
 from Preprocess import *
+from Baseline import *
 
 def basic_test() :
     observations = [[['a', 'cat'],['hello']],[['it', 'is', 'warm'],['a', 'dog'],['hello']]]
@@ -24,10 +25,11 @@ def basic_test() :
 train_recipes_dirs = ['../../train']
 #train_recipes_dirs = ['../../trial']
 
-test_recipes_dirs = ['../../test/pbnj/recipes', '../../test/chocolate_cake/recipes']
+test_recipes_dirs = ['../../test/pbnj', '../../test/chocolate_cake']
+#test_recipes_dirs = ['../../test']
 
 def test():
-    (recipes, filenames) = preprocess(train_recipes_dirs)
+    (recipes, filenames, orig_recipe_texts) = preprocess(train_recipes_dirs)
     print 'Completed preprocessing'
     print 'Train files :', filenames
     #recipes = recipes + recipes
@@ -35,7 +37,8 @@ def test():
     #temp.append(recipes[1])
     #temp.append(recipes[0])
     #recipes = temp
-    n = len(recipes[0])
+    #n = len(recipes[0])
+    n = 4
     
     atmp = numpy.random.random_sample((n, n))
     row_sums = atmp.sum(axis=1)
@@ -45,18 +48,28 @@ def test():
     pi = pitmp / sum(pitmp)
     
     hmm = RecipeHMM(n, pi, a)
-    hmm.train(recipes, 10)
-    #print "Pi", hmm.pi
-    #print "A", hmm.A
+    hmm.train(recipes, 100)
 
-    (recipes, filenames) = preprocess(test_recipes_dirs)
+    (recipes, filenames, orig_recipe_texts) = preprocess(test_recipes_dirs)
     filenames_with_recipes = zip(filenames, recipes)
     filenames_with_recipes.sort()
     for (filename, recipe) in filenames_with_recipes :
         print filename, ':',  hmm.forwardbackward(recipe, cache=True)    
     
+    #for (recipe, orig_text) in zip(recipes, orig_recipe_texts) :
+        #states =  hmm.decode(recipe)
+        #lines = orig_text
+        #output = zip(states, lines)
+        #for (state, line) in output :
+            #print state, ' : ', line
+        #print '-------------------------------------------------'    
+    
     #print "uni", hmm.uni
     #print "bi", hmm.bi
 
+def test_baseline() :
+    baseline(test_recipes_dirs)
+
 if __name__ == '__main__' :
     test()
+    #test_baseline()
