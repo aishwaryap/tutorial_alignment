@@ -6,6 +6,14 @@ This code is based on:
 
 import numpy, sys
 
+
+verb_pos_tags = ['VBG', 'VBN', 'VBD', 'VBP', 'VBZ', 'VB']
+adj_pos_tags = ['JJ', 'JJR', 'JJS']
+noun_pos_tags = ['NN', 'NNS', 'NNP', 'NNPS']
+adv_pos_tags = ['RB', 'RBR', 'RBS']
+
+delete_list = ['-rrb-', '-lrb-', '-RRB-', '-LRB-']
+
 class RecipeHMM :
     
     def __init__(self, n, pi=None, A=None, precision=numpy.longdouble, verbose=False):
@@ -49,22 +57,13 @@ class RecipeHMM :
         else :
             return self.bi[j]['-UNK-']
     
-    
     # o = [w_1, w_2 ... w_n]
     # b_j(o) = Pr()  
     def calc_b(self, j, o) :
-        unigrams = ['<s>'] + o + ['</s>']
-        bigrams = zip(unigrams, unigrams[1:])
-
         b = 1.0
-        for i in xrange(len(bigrams)) :
-            dum1 =  self.calc_bi(j, bigrams[i])
-            #dum2 =  self.calc_uni(j, bigrams[i][0])
-            #if(dum1>1.0):
-              #print dum1, bigrams[i]
-            #b *= self.calc_bi(j, bigrams[i]) / self.calc_uni(j, bigrams[i][0])
-            b *= self.calc_bi(j, bigrams[i]) 
-        return b    
+        for word in o :
+            b *= self.calc_uni(j, word)
+        return b
             
     def forwardbackward(self, observations, cache=False):
         '''
@@ -430,114 +429,38 @@ class RecipeHMM :
         '''
         observations is a list of observation sequences
         '''
-        #print 'In _mapB'
         self.uni = list()
-        self.bi = list()
         for i in xrange(self.n) :
 			self.uni.append(dict())
-			self.bi.append(dict())
-        #self.uni = [dict()] * self.n
-        #self.bi = [dict()] * self.n
-        
+            
         for j in xrange(self.n) :
             for (k, observation) in enumerate(observations) :
-                #print 'k = ', k, observation
                 for (t, phrase) in enumerate(observation) :
-                    #print 't = ', t, phrase
-                    # Assuming observation is a list of unigrams
-                    unigrams = ['<s>'] + phrase + ['</s>']
-                    bigrams = zip(unigrams, unigrams[1:])
+                    #print 'stats[\'gamma\'][', k, '][', t, '][', j, '] = ', stats['gamma'][k][t][j]
+                    #unigrams = [word for (word, pos) in phrase if pos in verb_pos_tags or pos in noun_pos_tags]
+                    unigrams = phrase
+                    #print 'unigrams= ', unigrams
                     
-                    #print 'unigrams = ', unigrams
-                    #print 'bigrams = ', bigrams
-                    
-                    #for unigram in unigrams :
-                        #if unigram in self.uni[j] :
-                            #self.uni[j][unigram] += stats['gamma'][k][t][j]
-                        #else :
-                            #self.uni[j][unigram] = stats['gamma'][k][t][j]
-                    ## TODO: Recheck the correct way to init this
-                    #self.uni[j]['-UNK-'] = 0.01
-                    #if stats['gamma'][k][t][j] > 1.0 :
-                    #print 'stats[\'gamma\'][', k, '][', t, '][', j,'] = ', stats['gamma'][k][t][j]
-                    for bigram in bigrams :
-                        if bigram in self.bi[j] :
-                            self.bi[j][bigram] += stats['gamma'][k][t][j]
+                    for unigram in unigrams :
+                        if unigram in self.uni[j] :
+                            self.uni[j][unigram] += stats['gamma'][k][t][j]
                         else :
-                            self.bi[j][bigram] = stats['gamma'][k][t][j]
-                    self.bi[j]['-UNK-'] = 0.01
+                            self.uni[j][unigram] = stats['gamma'][k][t][j]
+                    
+            self.uni[j]['-UNK-'] = 0.01      
             
-            #print        
-            #print 'self.uni[', j, '] = ', self.uni[j]
-            #print 'self.bi[', j, '] = ', self.bi[j]
-            
-            #remove_uni = []        
-            #for unigram in self.uni[j] :
-                #if self.uni[j][unigram] < 0.00000000001 :
-                    #remove_uni.append(unigram)
-            remove_bi = []
-            for bigram in self.bi[j] :
-                if self.bi[j][bigram] < 0.00000000001 :
-                    remove_bi.append(bigram)
-
-            #for unigram in remove_uni:
-                #del self.uni[j][unigram]
-            for bigram in remove_bi :
-                del self.bi[j][bigram]
-
-            #sum_uni = 0.0
-            #for unigram in self.uni[j] :
-                #sum_uni += self.uni[j][unigram]
-            #for unigram in self.uni[j] :
-                #self.uni[j][unigram] /= sum_uni    
-            
-            #print 'before normalization self.bi = ', self.bi
-            #print ' '
-            
-            sum_bi = 0.0
-            for bigram in self.bi[j] :
-                sum_bi += self.bi[j][bigram]
-            for bigram in self.bi[j] :
-                self.bi[j][bigram] /= sum_bi
-            
-            sum_bi = 0.0
-            for bigram in self.bi[j] :
-                sum_bi += self.bi[j][bigram]
-            #print 'sum_bi = ', sum_bi
-            
-            for bigram in self.bi[j] :
-				if bigram != '-UNK-' :
-					#print bigram[0], 
-					if bigram[0] in self.uni[j] :
-						self.uni[j][bigram[0]] += self.bi[j][bigram]
-					else :
-						self.uni[j][bigram[0]] = self.bi[j][bigram]												
-					#if bigram[1] == '</s>' :						
-						#if bigram[1] in self.uni[j] :
-						    #self.uni[j][bigram[1]] += self.bi[j][bigram]
-						#else :
-						    #self.uni[j][bigram[1]] = self.bi[j][bigram]												
-
-            #print 'self.uni[', j, '] = ', self.uni[j]
-            #self.uni[j]['-UNK-'] = 0.001
+            remove_uni = []        
+            for unigram in self.uni[j] :
+                if self.uni[j][unigram] < 0.00000000001 :
+                    remove_uni.append(unigram)
+            for unigram in remove_uni:
+                del self.uni[j][unigram] 
+                 
             sum_uni = 0.0
             for unigram in self.uni[j] :
 				sum_uni += self.uni[j][unigram]
-            #for unigram in self.uni[j] :
-				#self.uni[j][unigram] /= sum_uni				
-            self.uni[j]['-UNK-'] = 1.0 - sum_uni
-            #print 'self.uni[', j, '][\'-UNK-\'] = ', self.uni[j]['-UNK-']
-            #x = raw_input()
-            
-            #print 'sum_uni = ', sum_uni
-            #print 'sum_bi = ', sum_bi
-            
-            #print
-            #print 'After normalization'
+            for unigram in self.uni[j] :
+                self.uni[j][unigram] /= sum_uni
             #print 'self.uni[', j, '] = ', self.uni[j]
-            #print 'self.bi[', j, '] = ', self.bi[j]
-        
-        #print '\n\n'        
-        #print 'self.uni = ', self.uni
-        #print 'self.bi = ', self.bi
-        #x = raw_input()
+            #x = raw_input()
+    
