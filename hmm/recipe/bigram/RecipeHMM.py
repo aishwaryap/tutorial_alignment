@@ -339,6 +339,9 @@ class RecipeHMM :
         for observation in observations :
             prob_new += self.forwardbackward(observation, cache=True)
         
+        print 'prob_old = ', prob_old
+        print 'prob_new = ', prob_new
+        
         return prob_old, prob_new
     
     def _reestimateA(self,observations,stats):

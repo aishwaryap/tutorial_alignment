@@ -8,7 +8,7 @@ from nltk.stem.wordnet import WordNetLemmatizer
 
 from RecipeHMM import RecipeHMM
 
-sys.path.insert(0, '../../stanford-corenlp-python')
+sys.path.insert(0, '../../../stanford-corenlp-python')
 from jsonrpc import ServerProxy, JsonRpc20, TransportTcpIp, RPCTransportError
 
 class StanfordNLP:

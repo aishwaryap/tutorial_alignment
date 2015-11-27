@@ -3,7 +3,7 @@ from os import listdir
 from os.path import isfile, join
 
 from Preprocess import *
-from Baseline import *
+#from Baseline import *
 
 def basic_test() :
     observations = [[['a', 'cat'],['hello']],[['it', 'is', 'warm'],['a', 'dog'],['hello']]]
@@ -14,7 +14,9 @@ def basic_test() :
 
     pitmp = numpy.random.random_sample((2))
     pi = pitmp / sum(pitmp)
-    
+
+    print 'pi = ', pi
+    print 'a = ', a    
     hmm = RecipeHMM(2, pi, a)
     hmm.train(observations, 100)
     print "Pi", hmm.pi
@@ -22,10 +24,10 @@ def basic_test() :
     print "uni", hmm.uni
     print "bi", hmm.bi
 
-train_recipes_dirs = ['../../train']
+train_recipes_dirs = ['../../../train']
 #train_recipes_dirs = ['../../trial']
 
-test_recipes_dirs = ['../../test/pbnj', '../../test/chocolate_cake']
+test_recipes_dirs = ['../../../test/pbnj', '../../../test/chocolate_cake']
 #test_recipes_dirs = ['../../test']
 
 def test():
@@ -47,6 +49,8 @@ def test():
     pitmp = numpy.random.random_sample((n))
     pi = pitmp / sum(pitmp)
     
+    print 'pi = ', pi
+    print 'a = ', a
     hmm = RecipeHMM(n, pi, a)
     hmm.train(recipes, 100)
 

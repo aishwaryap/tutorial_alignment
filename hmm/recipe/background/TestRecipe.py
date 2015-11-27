@@ -3,7 +3,7 @@ from os import listdir
 from os.path import isfile, join
 
 from Preprocess import *
-from Baseline import *
+#from Baseline import *
 
 def basic_test() :
     observations = [[['a', 'cat'],['hello']],[['it', 'is', 'warm'],['a', 'dog'],['hello']]]
@@ -22,10 +22,10 @@ def basic_test() :
     print "uni", hmm.uni
     print "bi", hmm.bi
 
-train_recipes_dirs = ['../../train']
+train_recipes_dirs = ['../../../train']
 #train_recipes_dirs = ['../../trial']
 
-test_recipes_dirs = ['../../test/pbnj', '../../test/chocolate_cake']
+test_recipes_dirs = ['../../../test/pbnj', '../../../test/chocolate_cake']
 #test_recipes_dirs = ['../../test']
 
 def test():

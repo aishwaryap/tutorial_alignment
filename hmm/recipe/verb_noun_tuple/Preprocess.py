@@ -8,7 +8,7 @@ from nltk.stem.wordnet import WordNetLemmatizer
 
 from RecipeHMM import RecipeHMM
 
-sys.path.insert(0, '../../stanford-corenlp-python')
+sys.path.insert(0, '../../../stanford-corenlp-python')
 from jsonrpc import ServerProxy, JsonRpc20, TransportTcpIp, RPCTransportError
 
 class StanfordNLP:
@@ -92,10 +92,28 @@ def preprocess(recipes_dirs) :
                     orig_recipe_text.append(cur_orig_text)
                     pos = [str(word[1][u'PartOfSpeech']) for word in sentence_object[u'words']]
                     word_pos = zip(sentence, pos)
-                    lemmatized_sentence = [lemmatize(lmtzr, word, pos) for (word, pos) in word_pos] 
-                    only_words = get_only_words(lemmatized_sentence)
-                    phrases.append(only_words)
-            recipes.append(phrases)
+                    lemmatized_sentence = [(lemmatize(lmtzr, word, pos), pos) for (word, pos) in word_pos] 
+                    verbs = [word for (word, pos) in lemmatized_sentence if pos in verb_pos_tags]
+                    deps = sentence_object[u'dependencies']
+                    for verb in verbs :
+                        verb_with_nouns = (verb, )
+                        obj_noun = [str(word2) for [dep_type, word1, word2] in deps if str(word1) == verb and dep_type == 'dobj']
+                        other_relevant_noun = [str(word2) for [dep_type, word1, word2] in deps if str(word1) == verb and dep_type == 'nmod']
+                        if len(obj_noun) > 0 :
+                            if len(other_relevant_noun) > 0 :
+                                verb_with_nouns = (verb, obj_noun[0], other_relevant_noun[0])
+                            else :
+                                verb_with_nouns = (verb, obj_noun[0])
+                        else :
+                            if len(other_relevant_noun) > 0 :
+                                verb_with_nouns = (verb, other_relevant_noun[0])
+                        #print 'verb_with_nouns = ', verb_with_nouns
+                        phrases.append(verb_with_nouns)    
+            if len(phrases) > 0 :
+                recipes.append(phrases)
             orig_recipe_texts.append(orig_recipe_text)
             filenames.append(filename)
+    if len(recipes) == 0 :
+        recipes = ['-UNK-']
+    print recipes
     return (recipes, filenames, orig_recipe_texts)        
