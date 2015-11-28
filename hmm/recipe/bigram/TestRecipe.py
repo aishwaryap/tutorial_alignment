@@ -38,7 +38,7 @@ def test():
     #temp.append(recipes[0])
     #recipes = temp
     #n = len(recipes[0])
-    n = 4
+    n = 3
     
     atmp = numpy.random.random_sample((n, n))
     row_sums = atmp.sum(axis=1)

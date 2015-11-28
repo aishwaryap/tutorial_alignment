@@ -398,21 +398,21 @@ class RecipeHMM :
             stats['xi'].append(self._calcxi(observation, stats['alpha'][k], stats['beta'][k]))
             stats['gamma'].append(self._calcgamma(stats['xi'][k], len(observation)))
             
-            for i in range(self.n) :
-                for t in range(len(observation)) :
-                    if stats['alpha'][k][t][i] > 0.9999 or stats['alpha'][k][t][i] < 0.0 :
-                        print 'stats[\'alpha\'][', k, '][', t, '][', i, '] = ', stats['alpha'][k][t][i]
-                        x = raw_input()
-                    if stats['beta'][k][t][i] > 0.9999 or stats['beta'][k][t][i] < 0.0 :
-                        print 'stats[\'beta\'][', k, '][', t, '][', i, '] = ', stats['beta'][k][t][i]    
+            #for i in range(self.n) :
+                #for t in range(len(observation)) :
+                    #if stats['alpha'][k][t][i] > 0.9999 or stats['alpha'][k][t][i] < 0.0 :
+                        #print 'stats[\'alpha\'][', k, '][', t, '][', i, '] = ', stats['alpha'][k][t][i]
                         #x = raw_input()
-                    if stats['gamma'][k][t][i] < 0.0 :
-                        print 'stats[\'gamma\'][', k, '][', t, '][', i, '] = ', stats['gamma'][k][t][i]        
-                        x = raw_input()
-                    for j in range(self.n) :
-                        if stats['xi'][k][t][i][j] < 0.0 :
-                            print 'stats[\'xi\'][', k, '][', t, '][', i, '][', j, '] = ', stats['xi'][k][t][i][j]        
-                            x = raw_input()
+                    #if stats['beta'][k][t][i] > 0.9999 or stats['beta'][k][t][i] < 0.0 :
+                        #print 'stats[\'beta\'][', k, '][', t, '][', i, '] = ', stats['beta'][k][t][i]    
+                        ##x = raw_input()
+                    #if stats['gamma'][k][t][i] < 0.0 :
+                        #print 'stats[\'gamma\'][', k, '][', t, '][', i, '] = ', stats['gamma'][k][t][i]        
+                        #x = raw_input()
+                    #for j in range(self.n) :
+                        #if stats['xi'][k][t][i][j] < 0.0 :
+                            #print 'stats[\'xi\'][', k, '][', t, '][', i, '][', j, '] = ', stats['xi'][k][t][i][j]        
+                            #x = raw_input()
         
         return stats
     
@@ -434,25 +434,25 @@ class RecipeHMM :
         new_model['pi'] = stats['gamma'][0][0]
         new_model['A'] = self._reestimateA(observations, stats)
         
-        sum_pi = 0
-        for i in range(self.n) :
-            sum_pi += new_model['pi'][i]
-            if new_model['pi'][i] > 0.9999 or new_model['pi'][i] < 0.0 :
-                print 'new_model[\'pi\'][', i, '] = ', new_model['pi'][i]
-                x = raw_input()
+        #sum_pi = 0
+        #for i in range(self.n) :
+            #sum_pi += new_model['pi'][i]
+            #if new_model['pi'][i] > 0.9999 or new_model['pi'][i] < 0.0 :
+                #print 'new_model[\'pi\'][', i, '] = ', new_model['pi'][i]
+                #x = raw_input()
             
-            sum_a_i = 0
-            for j in range(self.n) :
-                sum_a_i += new_model['A'][i][j]
-                if new_model['A'][i][j] > 0.9999 or new_model['A'][i][j] < 0.0 :
-                    print 'new_model[\'A\'][', i, '][', j, '] = ', new_model['A'][i][j]
-                    x = raw_input()
-            if sum_a_i < 0.9999 or sum_a_i > 1.0001 :
-                print 'sum(a[', i, ']) = ', sum_a_i
-                x = raw_input()
-        if sum_pi < 0.9999 or sum_pi > 1.0001 :
-            print 'sum_pi ', sum_pi
-            x = raw_input()
+            #sum_a_i = 0
+            #for j in range(self.n) :
+                #sum_a_i += new_model['A'][i][j]
+                #if new_model['A'][i][j] > 0.9999 or new_model['A'][i][j] < 0.0 :
+                    #print 'new_model[\'A\'][', i, '][', j, '] = ', new_model['A'][i][j]
+                    #x = raw_input()
+            #if sum_a_i < 0.9999 or sum_a_i > 1.0001 :
+                #print 'sum(a[', i, ']) = ', sum_a_i
+                #x = raw_input()
+        #if sum_pi < 0.9999 or sum_pi > 1.0001 :
+            #print 'sum_pi ', sum_pi
+            #x = raw_input()
         
         return new_model
     
