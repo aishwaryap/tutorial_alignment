@@ -352,6 +352,9 @@ class RecipeHMM :
         for observation in observations :
             prob_new += self.forwardbackward(observation, cache=True)
         
+        print 'prob_old = ', prob_old
+        print 'prob_new = ', prob_new
+        
         return prob_old, prob_new
     
     def _reestimateA(self,observations,stats):
@@ -365,14 +368,18 @@ class RecipeHMM :
         '''
         A_new = numpy.zeros((self.n,self.n),dtype=self.precision)
         
-        for k in xrange(len(observations)) :
-            P_k = sum(stats['alpha'][k][-1])
-            for i in xrange(self.n):
-                for j in xrange(self.n):        
-                    term = 0.0
+        for i in xrange(self.n):
+            for j in xrange(self.n):        
+                for k in xrange(len(observations)) :
+                    P_k = sum(stats['alpha'][k][-1])
+                    num = 0.0
+                    den = 0.0
                     for t in xrange(len(observations[k])-1): 
-                        term += stats['alpha'][k][t][i] * self.A[i][j] * self.calc_b(j, observations[k][t+1]) * stats['beta'][k][t+1][j]
-                    A_new[i][j] += term / P_k
+                        num += stats['alpha'][k][t][i] * self.A[i][j] * self.calc_b(j, observations[k][t+1]) * stats['beta'][k][t+1][j]
+                        den += stats['alpha'][k][t][i] * stats['beta'][k][t][i]
+                    num /= P_k
+                    den /= P_k
+                A_new[i][j] = num / den
                     
         return A_new
     
@@ -457,15 +464,22 @@ class RecipeHMM :
                     unigrams = ['<s>'] + phrase + ['</s>']
                     bigrams = zip(unigrams, unigrams[1:])
                     
+                    if t == len(observation) - 1 :
+                        prob_being_in_state = 0
+                        for s in range(self.n) :
+                            prob_being_in_state += stats['xi'][k][t-1][s][j]    
+                    else :
+                        prob_being_in_state = stats['gamma'][k][t][j]
+                    
                     for bigram in bigrams :
                         if bigram in self.bi[j] :
-                            self.bi[j][bigram] += stats['gamma'][k][t][j]
+                            self.bi[j][bigram] += prob_being_in_state
                         else :
-                            self.bi[j][bigram] = stats['gamma'][k][t][j]
+                            self.bi[j][bigram] = prob_being_in_state
                         if bigram in self.bg_bi :
-                            self.bg_bi[bigram] += stats['gamma'][k][t][j]
+                            self.bg_bi[bigram] += prob_being_in_state
                         else :
-                            self.bg_bi[bigram] = stats['gamma'][k][t][j]
+                            self.bg_bi[bigram] = prob_being_in_state
                     self.bi[j]['-UNK-'] = 0.01
             
             remove_bi = []

@@ -64,6 +64,7 @@ class RecipeHMM :
               #print dum1, bigrams[i]
             #b *= self.calc_bi(j, bigrams[i]) / self.calc_uni(j, bigrams[i][0])
             b *= self.calc_bi(j, bigrams[i]) 
+        #print ';  b = ', b, 
         return b    
             
     def forwardbackward(self, observations, cache=False):
@@ -341,6 +342,7 @@ class RecipeHMM :
         
         print 'prob_old = ', prob_old
         print 'prob_new = ', prob_new
+        #x=raw_input()
         
         return prob_old, prob_new
     
@@ -355,14 +357,18 @@ class RecipeHMM :
         '''
         A_new = numpy.zeros((self.n,self.n),dtype=self.precision)
         
-        for k in xrange(len(observations)) :
-            P_k = sum(stats['alpha'][k][-1])
-            for i in xrange(self.n):
-                for j in xrange(self.n):        
-                    term = 0.0
+        for i in xrange(self.n):
+            for j in xrange(self.n):        
+                for k in xrange(len(observations)) :
+                    P_k = sum(stats['alpha'][k][-1])
+                    num = 0.0
+                    den = 0.0
                     for t in xrange(len(observations[k])-1): 
-                        term += stats['alpha'][k][t][i] * self.A[i][j] * self.calc_b(j, observations[k][t+1]) * stats['beta'][k][t+1][j]
-                    A_new[i][j] += term / P_k
+                        num += stats['alpha'][k][t][i] * self.A[i][j] * self.calc_b(j, observations[k][t+1]) * stats['beta'][k][t+1][j]
+                        den += stats['alpha'][k][t][i] * stats['beta'][k][t][i]
+                    num /= P_k
+                    den /= P_k
+                A_new[i][j] = num / den
                     
         return A_new
     
@@ -391,6 +397,22 @@ class RecipeHMM :
             stats['beta'].append(self._calcbeta(observation))
             stats['xi'].append(self._calcxi(observation, stats['alpha'][k], stats['beta'][k]))
             stats['gamma'].append(self._calcgamma(stats['xi'][k], len(observation)))
+            
+            for i in range(self.n) :
+                for t in range(len(observation)) :
+                    if stats['alpha'][k][t][i] > 0.9999 or stats['alpha'][k][t][i] < 0.0 :
+                        print 'stats[\'alpha\'][', k, '][', t, '][', i, '] = ', stats['alpha'][k][t][i]
+                        x = raw_input()
+                    if stats['beta'][k][t][i] > 0.9999 or stats['beta'][k][t][i] < 0.0 :
+                        print 'stats[\'beta\'][', k, '][', t, '][', i, '] = ', stats['beta'][k][t][i]    
+                        #x = raw_input()
+                    if stats['gamma'][k][t][i] < 0.0 :
+                        print 'stats[\'gamma\'][', k, '][', t, '][', i, '] = ', stats['gamma'][k][t][i]        
+                        x = raw_input()
+                    for j in range(self.n) :
+                        if stats['xi'][k][t][i][j] < 0.0 :
+                            print 'stats[\'xi\'][', k, '][', t, '][', i, '][', j, '] = ', stats['xi'][k][t][i][j]        
+                            x = raw_input()
         
         return stats
     
@@ -411,6 +433,26 @@ class RecipeHMM :
         # new init vector is set to the frequency of being in each step at t=0 
         new_model['pi'] = stats['gamma'][0][0]
         new_model['A'] = self._reestimateA(observations, stats)
+        
+        sum_pi = 0
+        for i in range(self.n) :
+            sum_pi += new_model['pi'][i]
+            if new_model['pi'][i] > 0.9999 or new_model['pi'][i] < 0.0 :
+                print 'new_model[\'pi\'][', i, '] = ', new_model['pi'][i]
+                x = raw_input()
+            
+            sum_a_i = 0
+            for j in range(self.n) :
+                sum_a_i += new_model['A'][i][j]
+                if new_model['A'][i][j] > 0.9999 or new_model['A'][i][j] < 0.0 :
+                    print 'new_model[\'A\'][', i, '][', j, '] = ', new_model['A'][i][j]
+                    x = raw_input()
+            if sum_a_i < 0.9999 or sum_a_i > 1.0001 :
+                print 'sum(a[', i, ']) = ', sum_a_i
+                x = raw_input()
+        if sum_pi < 0.9999 or sum_pi > 1.0001 :
+            print 'sum_pi ', sum_pi
+            x = raw_input()
         
         return new_model
     
@@ -463,11 +505,27 @@ class RecipeHMM :
                     #self.uni[j]['-UNK-'] = 0.01
                     #if stats['gamma'][k][t][j] > 1.0 :
                     #print 'stats[\'gamma\'][', k, '][', t, '][', j,'] = ', stats['gamma'][k][t][j]
+                    
+                    # Prob of being in state i at time t =
+                    #   gamma_t(i), t \neq T (equal to no of times you 
+                    #                       transition from i at time t)
+                    #   \sum_j{\xi_{t-1}(j, i)}, t = T (no of times you 
+                    #               transition to state i in t-1)
+                    
+                    if t == len(observation) - 1 :
+                        prob_being_in_state = 0
+                        for s in range(self.n) :
+                            prob_being_in_state += stats['xi'][k][t-1][s][j]    
+                    else :
+                        prob_being_in_state = stats['gamma'][k][t][j]
+                    #print 'phrase = ', phrase
+                    #print 'prob_being_in_state = ', prob_being_in_state
+                    #x = raw_input()
                     for bigram in bigrams :
                         if bigram in self.bi[j] :
-                            self.bi[j][bigram] += stats['gamma'][k][t][j]
+                            self.bi[j][bigram] += prob_being_in_state
                         else :
-                            self.bi[j][bigram] = stats['gamma'][k][t][j]
+                            self.bi[j][bigram] = prob_being_in_state
                     self.bi[j]['-UNK-'] = 0.01
             
             #print        

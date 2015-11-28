@@ -338,6 +338,9 @@ class RecipeHMM :
         for observation in observations :
             prob_new += self.forwardbackward(observation, cache=True)
         
+        print 'prob_old = ', prob_old
+        print 'prob_new = ', prob_new
+        
         return prob_old, prob_new
     
     def _reestimateA(self,observations,stats):
@@ -351,14 +354,18 @@ class RecipeHMM :
         '''
         A_new = numpy.zeros((self.n,self.n),dtype=self.precision)
         
-        for k in xrange(len(observations)) :
-            P_k = sum(stats['alpha'][k][-1])
-            for i in xrange(self.n):
-                for j in xrange(self.n):        
-                    term = 0.0
+        for i in xrange(self.n):
+            for j in xrange(self.n):        
+                for k in xrange(len(observations)) :
+                    P_k = sum(stats['alpha'][k][-1])
+                    num = 0.0
+                    den = 0.0
                     for t in xrange(len(observations[k])-1): 
-                        term += stats['alpha'][k][t][i] * self.A[i][j] * self.calc_b(j, observations[k][t+1]) * stats['beta'][k][t+1][j]
-                    A_new[i][j] += term / P_k
+                        num += stats['alpha'][k][t][i] * self.A[i][j] * self.calc_b(j, observations[k][t+1]) * stats['beta'][k][t+1][j]
+                        den += stats['alpha'][k][t][i] * stats['beta'][k][t][i]
+                    num /= P_k
+                    den /= P_k
+                A_new[i][j] = num / den
                     
         return A_new
     
@@ -441,11 +448,24 @@ class RecipeHMM :
                     unigrams = phrase
                     #print 'unigrams= ', unigrams
                     
+                    # Prob of being in state i at time t =
+                    #   gamma_t(i), t \neq T (equal to no of times you 
+                    #                       transition from i at time t)
+                    #   \sum_j{\xi_{t-1}(j, i)}, t = T (no of times you 
+                    #               transition to state i in t-1)
+                    
+                    if t == len(observation) - 1 :
+                        prob_being_in_state = 0
+                        for s in range(self.n) :
+                            prob_being_in_state += stats['xi'][k][t-1][s][j]    
+                    else :
+                        prob_being_in_state = stats['gamma'][k][t][j]
+                    
                     for unigram in unigrams :
                         if unigram in self.uni[j] :
-                            self.uni[j][unigram] += stats['gamma'][k][t][j]
+                            self.uni[j][unigram] += prob_being_in_state
                         else :
-                            self.uni[j][unigram] = stats['gamma'][k][t][j]
+                            self.uni[j][unigram] = prob_being_in_state
                     
             self.uni[j]['-UNK-'] = 0.01      
             

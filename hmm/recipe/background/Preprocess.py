@@ -64,12 +64,12 @@ def preprocess(recipes_dirs) :
             f = open(filename)
             text = f.read()
             parts = list()
-            if len(text) > 3000 :
+            if len(text) > 2000 :
                 paras = text.split('\n')
                 idx = 0
                 while idx < len(paras) :
                     part = ''
-                    while len(part) < 1500 and idx < len(paras) :
+                    while len(part) < 1000 and idx < len(paras) :
                         part = part + paras[idx] + '\n'
                         idx += 1
                     parts.append(part.strip())

@@ -352,15 +352,18 @@ class RecipeHMM :
         '''
         A_new = numpy.zeros((self.n,self.n),dtype=self.precision)
         
-        for k in xrange(len(observations)) :
-            P_k = sum(stats['alpha'][k][-1])
-            #print 'P_k = ', P_k
-            for i in xrange(self.n):
-                for j in xrange(self.n):        
-                    term = 0.0
+        for i in xrange(self.n):
+            for j in xrange(self.n):        
+                for k in xrange(len(observations)) :
+                    P_k = sum(stats['alpha'][k][-1])
+                    num = 0.0
+                    den = 0.0
                     for t in xrange(len(observations[k])-1): 
-                        term += stats['alpha'][k][t][i] * self.A[i][j] * self.calc_b(j, observations[k][t+1]) * stats['beta'][k][t+1][j]
-                    A_new[i][j] += term / P_k
+                        num += stats['alpha'][k][t][i] * self.A[i][j] * self.calc_b(j, observations[k][t+1]) * stats['beta'][k][t+1][j]
+                        den += stats['alpha'][k][t][i] * stats['beta'][k][t][i]
+                    num /= P_k
+                    den /= P_k
+                A_new[i][j] = num / den
                     
         return A_new
     
@@ -450,10 +453,18 @@ class RecipeHMM :
         for j in xrange(self.n) :
             for (k, observation) in enumerate(observations) :
                 for (t, verb_noun_tuple) in enumerate(observation) :
-                    if verb_noun_tuple in self.uni[j] :
-                        self.uni[j][verb_noun_tuple] += stats['gamma'][k][t][j]
+                    
+                    if t == len(observation) - 1 :
+                        prob_being_in_state = 0
+                        for s in range(self.n) :
+                            prob_being_in_state += stats['xi'][k][t-1][s][j]    
                     else :
-                        self.uni[j][verb_noun_tuple] = stats['gamma'][k][t][j]
+                        prob_being_in_state = stats['gamma'][k][t][j]
+                    
+                    if verb_noun_tuple in self.uni[j] :
+                        self.uni[j][verb_noun_tuple] += prob_being_in_state
+                    else :
+                        self.uni[j][verb_noun_tuple] = prob_being_in_state
             self.uni[j]['-UNK-'] = 0.01      
             
             remove_uni = []        
