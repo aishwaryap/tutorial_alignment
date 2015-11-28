@@ -242,6 +242,7 @@ class RecipeHMM :
                       print 'self.A[',i,'][',j,'] = ', self.A[i][j]
                       print 'self.calc_b(',j,', observations[',t+1,']) = ', self.calc_b(j, observations[t+1])
                       print 'beta[',t+1,'][',j,'] = ', beta[t+1][j]
+                      sys.exit(1)
                     
             for i in xrange(self.n):
                 for j in xrange(self.n):
