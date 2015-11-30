@@ -107,6 +107,7 @@ def preprocess_texts(recipes_texts) :
     orig_recipe_texts = list()
     for (i, text) in enumerate(recipes_texts) :
         print 'Preprocessing text file ', i 
+        #print text
         parts = list()
         if len(text) > 2000 :
             paras = text.split('\n')
