@@ -99,3 +99,46 @@ def preprocess(recipes_dirs) :
             orig_recipe_texts.append(orig_recipe_text)
             filenames.append(filename)
     return (recipes, filenames, orig_recipe_texts)        
+
+def preprocess_texts(recipes_texts) :
+    nlp = StanfordNLP()
+    lmtzr = WordNetLemmatizer()
+    recipes = list()
+    orig_recipe_texts = list()
+    for (i, text) in enumerate(recipes_texts) :
+        print 'Preprocessing text file ', i 
+        #print text
+        parts = list()
+        if len(text) > 2000 :
+            paras = text.split('\n')
+            idx = 0
+            while idx < len(paras) :
+                part = ''
+                while len(part) < 1000 and idx < len(paras) :
+                    part = part + paras[idx] + '\n'
+                    idx += 1
+                parts.append(part.strip())
+        else :
+            parts = [text]
+
+        phrases = list()    
+        orig_recipe_text = list()
+        for part in parts :
+            lines = part.split('\n')
+            text = ' '.join(lines)
+            text = remove_non_ascii_chars(text)
+            parse = nlp.parse(text.strip())
+            for sentence_object in parse[u'sentences'] :
+                #tree = Tree.parse(sentence_object[u'parsetree'])
+                #pprint(tree)
+                sentence = [str(word[0]).lower() for word in sentence_object[u'words']]
+                cur_orig_text = ' '.join([str(word[0]) for word in sentence_object[u'words']])
+                orig_recipe_text.append(cur_orig_text)
+                pos = [str(word[1][u'PartOfSpeech']) for word in sentence_object[u'words']]
+                word_pos = zip(sentence, pos)
+                lemmatized_sentence = [lemmatize(lmtzr, word, pos) for (word, pos) in word_pos] 
+                only_words = get_only_words(lemmatized_sentence)
+                phrases.append(only_words)
+        recipes.append(phrases)
+        orig_recipe_texts.append(orig_recipe_text)
+    return (recipes, orig_recipe_texts)        

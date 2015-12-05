@@ -108,3 +108,55 @@ def preprocess(recipes_dirs) :
             orig_recipe_texts.append(orig_recipe_text)
             filenames.append(filename)
     return (recipes, filenames, orig_recipe_texts)        
+
+def preprocess_texts(recipes_texts) :
+    nlp = StanfordNLP()
+    lmtzr = WordNetLemmatizer()
+    recipes = list()
+    orig_recipe_texts = list()
+    for (i, text) in enumerate(recipes_texts) :
+        print 'Preprocessing text file ', i 
+        #print text
+        parts = list()
+        if len(text) > 2000 :
+            paras = text.split('\n')
+            idx = 0
+            while idx < len(paras) :
+                part = ''
+                while len(part) < 1000 and idx < len(paras) :
+                    part = part + paras[idx] + '\n'
+                    idx += 1
+                parts.append(part.strip())
+        else :
+            parts = [text]
+
+        phrases = list()    
+        orig_recipe_text = list()
+        for part in parts :
+            lines = part.split('\n')
+            text = ' '.join(lines)
+            text = remove_non_ascii_chars(text)
+            parse = nlp.parse(text.strip())
+            for sentence_object in parse[u'sentences'] :
+                #tree = Tree.parse(sentence_object[u'parsetree'])
+                #pprint(tree)
+                sentence = [str(word[0]).lower() for word in sentence_object[u'words']]
+                cur_orig_text = ' '.join([str(word[0]) for word in sentence_object[u'words']])
+                orig_recipe_text.append(cur_orig_text)
+                pos = [str(word[1][u'PartOfSpeech']) for word in sentence_object[u'words']]
+                pos_copy = copy.deepcopy(pos)
+                word_pos = zip(sentence, pos)
+                #print 'word_pos = ', word_pos
+                lemmatized_sentence_with_pos = [(lemmatize(lmtzr, word, pos), pos) for (word, pos) in word_pos] 
+                #print 'lemmatized_sentence = ', lemmatized_sentence
+                #print 'pos = ', pos
+                #lemmatized_sentence_with_pos = zip(lemmatized_sentence, pos_copy)
+                #print 'lemmatized_sentence_with_pos = ', lemmatized_sentence_with_pos
+                only_words = get_only_words(lemmatized_sentence_with_pos)
+                #print 'only_words = ',only_words
+                verbs_and_nouns = [word for (word, pos) in only_words if pos in verb_pos_tags or pos in noun_pos_tags]
+                #print'verbs_and_nouns = ',verbs_and_nouns 
+                phrases.append(verbs_and_nouns)
+        recipes.append(phrases)
+        orig_recipe_texts.append(orig_recipe_text)
+    return (recipes, orig_recipe_texts)        

@@ -1,0 +1,136 @@
+0.0  :  1 | Heat the oven to 180C -LRB- gas mark 4 -RRB- .
+1.0  :  2 | Lightly grease an 18cm -LRB- 7in -RRB- round cake tin with a little extra butter or margarine and cut a piece of greaseproof paper or non-stick baking parchment to fit the base of the tin .
+0.0  :  3 | Put all of the ingredients in a large mixing bowl and beat with a wooden spoon or a hand-held mixer for 1 minute , or until just combined .
+1.0  :  3 | It 's important not to beat the batter too much - just long enough to make it smooth .
+0.0  :  4 | Pour or spoon the mixture into the tin , smooth the top and bake on the middle shelf of the oven for about 45-50 minutes .
+1.0  :  4 | The cake is cooked when it looks well risen and golden ; the top should spring back when lightly touched with a fingertip .
+0.0  :  4 | Another test is to insert a skewer into the centre of the cake - it should come out clean .
+1.0  :  5 | Let the cake sit in the tin for 5 minutes , then gently run a knife around the edge and turn the cake out onto a wire rack to cool .
+-------------------------------------------------
+0.0  :  2 | Grease and flour your cake baking pan and set aside .
+1.0  :  1 | Preheat your oven to 325 degrees F. 3 | Mix together all dry ingredients in a large mixing bowl : flour , sugar , baking soda , salt and cocoa .
+0.0  :  3 | Make three holes with a spatula or mixing spoon .
+1.0  :  3 | Pour the oil in one of the holes , the vinegar in another hole and the vanilla in the last hole .
+0.0  :  3 | Add the cold water on top of all of the chocolate cake ingredients .
+1.0  :  3 | Start your mixer out on low and increase the speed as your ingredients begin to come together .
+0.0  :  3 | Continue to mix until all of the ingredients are incorporated and the chocolate cake mixture is smooth .
+1.0  :  4 | Pour your chocolate cake mixture into your baking pan scraping the sides and bottom with your spatula .
+0.0  :  4 | Settle or spread the mixture into the pan evenly .
+1.0  :  4 | Bake on 325 degrees F for about 1 hour .
+0.0  :  5 | Check to see if cake is ready by using a cake tester .
+-------------------------------------------------
+2.0  :  3 | Sift the dry ingredients together .
+0.0  :  3 | The dry ingredients are : flour , sugar , salt , baking soda , and cocoa .
+1.0  :  3 | Simply place everything in a sifter and shake it back and forth over a bowl to eliminate the clumps .
+0.0  :  3 | Stir in the liquid ingredients and stir well .
+1.0  :  3 | These are the vinegar , oil , vanilla , water and egg .
+0.0  :  3 | Some people like to add these ingredients individually , but others stir them together in a second bowl and before adding them to the dry ingredients .
+1.0  :  4 | Pour the mixture into an 8-inch greased and floured round pan .
+0.0  :  2 | The grease and flour will keep the mix from sticking to the pan .
+1.0  :  4 | Bake at 350F -LRB- 177C -RRB- for 30 minutes .
+0.0  :  5 | Let the cake cool for 5 minutes .
+1.0  :  6 | Frost as desired .
+-------------------------------------------------
+1.0  :  1 | Preheat an oven to 325 F. 3 | Fill a saucepan with water , bring it to a boil , turn off the heat and rest the bowl on the inside rim of the saucepan , just above the height of the water .
+0.0  :  3 | This ensures that the chocolate does not get overheated .
+1.0  :  3 | Boil the water using a saucepan on the stove and then whisk the chocolate into the boiling water .
+0.0  :  The chocolate must still be warm in order prevent it from seizing .
+1.0  :  3 | Place the room-temperature butter and sugar into a mixing bowl .
+0.0  :  3 | Using a paddle attachment , turn the mixer to medium speed and cream until the mixture becomes light and fluffy .
+1.0  :  3 | This process of aeration is key to creating a light and tender final product .
+0.0  :  2 | The butter will cream more easily if it is soft and at room-temperature .
+1.0  :  2 | Be sure to occasionally scape down the sides of the bowl to ensure that the ingredients are being incorporated evenly .
+0.0  :  3 | Gradually add the egg yolks and vanilla and beat until fully incorporated .
+1.0  :  3 | Adding eggs a few at a time helps prevent the batter from separating .
+5.0  :  3 | Room temperature eggs also aid in creating a more cohesive batter .
+2.0  :  3 | Beat in the melted chocolate .
+4.0  :  3 | Sift all the dry ingredients -LRB- flour , soda , powder , and salt -RRB- .
+0.0  :  3 | Add the dry ingredients and the sour cream alternately into the batter .
+1.0  :  3 | To do this , add one-third of the dry ingredients and then about half of the sour cream .
+0.0  :  3 | Repeat this until all of the dry ingredients and the sour cream has been incorporated evenly .
+1.0  :  3 | This gradual and alternating addition process allows the batter to accept a larger quantities of liquid , creating a moister and more delicious final result .
+0.0  :  3 | Beat the batter until smooth , but be careful not to over-mix .
+1.0  :  4 | Prepare baking pans with pan spray and divide the batter evenly .
+0.0  :  4 | Bake until the cakes spring back slightly to the touch .
+1.0  :  5 | Baking times will vary depending on the individual ovens and a number of environmental elements , so it is best to use your senses of touch , smell and sight , rather than rely on a timer .
+-------------------------------------------------
+5.0  :  1 | Heat oven to 350F .
+3.0  :  2 | Grease and flour two 9-inch round baking pans .
+0.0  :  3 | Stir together sugar , flour , cocoa , baking powder , baking soda and salt in large bowl .
+1.0  :  3 | Add eggs , milk , oil and vanilla ; beat on medium speed of mixer 2 minutes .
+0.0  :  Stir in boiling water -LRB- batter will be thin -RRB- .
+3.0  :  4 | Pour batter into prepared pans .
+0.0  :  4 | Bake 30 to 35 minutes or until wooden pick inserted in center comes out clean .
+3.0  :  5 | Cool 10 minutes ; remove from pans to wire racks .
+0.0  :  5 | Cool completely .
+1.0  :  6 | Frost with `` PERFECTLY CHOCOLATE '' CHOCOLATE FROSTING .
+0.0  :  6 | Makes 12 servings .
+-------------------------------------------------
+5.0  :  1 | Preheat oven to 350 degrees .
+3.0  :  2 | Butter cake pans .
+0.0  :  2 | Line bottoms with parchment paper , and butter paper .
+1.0  :  2 | Dust the pans with cocoa ; tap out extra .
+0.0  :  3 | Sift cocoa , flour , baking soda , baking powder , salt , and sugar into bowl .
+1.0  :  3 | Beat in oil , buttermilk , vanilla , eggs , and hot water one at a time , using a mixer set at low .
+0.0  :  3 | Beat until smooth , about 2 minutes .
+3.0  :  4 | Pour batter into pans .
+0.0  :  4 | Bake 45 to 55 minutes , or until a toothpick inserted into the centers comes out clean ; an adult should rotate the pans halfway through and remove cakes from the oven .
+1.0  :  5 | Let cakes cool in pans on wire racks , 20 minutes , before inverting to remove .
+0.0  :  5 | Discard paper .
+1.0  :  5 | Cool completely on racks , top side up .
+0.0  :  5 | An adult should cut off top of one layer .
+1.0  :  5 | With a butter knife , frost top of trimmed layer .
+5.0  :  5 | Place the other layer on top .
+3.0  :  6 | Frost top and sides of cake .
+-------------------------------------------------
+5.0  :  1 | Preheat the oven to 350 degrees F. 2 | Butter two 8-inch x 2-inch round cake pans .
+3.0  :  2 | Line with parchment paper , then butter and flour the pans .
+0.0  :  3 | Sift the flour , sugar , cocoa , baking soda , baking powder , and salt into the bowl of an electric mixer fitted with a paddle attachment and mix on low speed until combined .
+4.0  :  3 | In another bowl , combine the buttermilk , oil , eggs , and vanilla .
+5.0  :  3 | With the mixer on low speed , slowly add the wet ingredients to the dry .
+3.0  :  3 | With mixer still on low , add the coffee and stir just to combine , scraping the bottom of the bowl with a rubber spatula .
+0.0  :  4 | Pour the batter into the prepared pans and bake for 35 to 40 minutes , until a cake tester comes out clean .
+3.0  :  5 | Cool in the pans for 30 minutes , then turn them out onto a cooling rack and cool completely .
+0.0  :  5 | Place 1 layer , flat side up , on a flat plate or cake pedestal .
+3.0  :  6 | With a knife or offset spatula , spread the top with frosting .
+0.0  :  6 | Place the second layer on top , rounded side up , and spread the frosting evenly on the top and sides of the cake .
+-------------------------------------------------
+2.0  :  1 | Pre-heat oven to 350 degrees .
+0.0  :  2 | Grease and flour three 6in x 1.5 in round cake pans .
+1.0  :  3 | Mix together flour , cocoa powder , baking powder and baking soda .
+0.0  :  3 | Set aside .
+1.0  :  3 | In a large bowl , beat butter , eggs and vanilla .
+0.0  :  3 | Gradually add sugar .
+1.0  :  3 | Beat on medium to high speed for about 3-4 minutes until well mixed 3 | Alternately combine in flour mixture and milk to batter while beating .
+0.0  :  3 | Continue to beat until batter is smooth .
+1.0  :  4 | Pour equal amounts of batter into greased and floured round cake pans .
+0.0  :  4 | Bake 30 to 35 minutes .
+1.0  :  4 | Check with a toothpick to se if it is done .
+0.0  :  Bake a few minutes more , if needed .
+1.0  :  5 | Remove from oven and allow cakes to cool in pans for a few minutes .
+0.0  :  5 | Place cakes on a wire rack , to them allow to completely cool .
+-------------------------------------------------
+2.0  :  3 | Sift the dry ingredients together .
+0.0  :  3 | The dry ingredients are : flour , sugar , salt , baking soda , and cocoa .
+1.0  :  3 | Simply place everything in a sifter and shake it back and forth over a bowl to eliminate the clumps .
+0.0  :  3 | Stir in the liquid ingredients and stir well .
+1.0  :  3 | These are the vinegar , oil , vanilla , water and egg .
+0.0  :  3 | Some people like to add these ingredients individually , but others stir them together in a second bowl and before adding them to the dry ingredients .
+1.0  :  4 | Pour the mixture into an 8-inch greased and floured round pan .
+0.0  :  2 | The grease and flour will keep the mix from sticking to the pan .
+1.0  :  4 | Bake at 350 F -LRB- 177 C -RRB- .
+0.0  :  -LRB- 175 C. -RRB- for 30 minutes .
+3.0  :  5 | Let the cake cool for 5 minutes .
+0.0  :  6 | Frost as desired .
+-------------------------------------------------
+1.0  :  2 | In a bowl , cream butter and sugar until fluffy .
+0.0  :  3 | Add eggs , one at a time , beating well after each addition .
+1.0  :  3 | Combine flour , cocoa , baking soda and salt ; add to creamed mixture alternately with milk , beating until smooth after each addition .
+0.0  :  4 | Pour batter into a greased and floured 13-in .
+3.0  :  x 9-in .
+0.0  :  pan .
+1.0  :  4 | Bake at 350 for 35-40 minutes or until cake tests done .
+0.0  :  5 | Cool on a wire rack .
+1.0  :  6 | When cake is cool , dust with confectioners ' sugar or frost with your favorite frosting .
+-------------------------------------------------
+

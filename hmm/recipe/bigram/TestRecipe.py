@@ -1,16 +1,19 @@
 import numpy, sys, copy, re
-import editdistance
+
 from os import listdir
 from os.path import isfile, join
 from itertools import permutations
+import editdistance
 
 from Preprocess import *
 #from Baseline import *
 
-train_recipes_dirs = ['../../../train']
+train_recipes_dirs = ['../../../train_chocolate_cake']
+#train_recipes_dirs = ['../../../train_pbnj']
 
 #test_recipes_dirs = ['../../../test/pbnj', '../../../test/chocolate_cake']
 #test_recipes_dirs = ['../../../groundTruth/pbnj']
+#test_recipes_dirs = ['../../../special']
 test_recipes_dirs = ['../../../groundTruth/chocolate_cake']
 
 def map_states(old_states, new_states, seq) :
@@ -97,10 +100,20 @@ def test_sequence_alignment() :
         ground_truth_str_sequences.append(ground_truth)
         # Note: The lengths of the two sequences need not be the same
         
-    dist_list = get_least_edit_distance(all_recipes_states, ground_truth_str_sequences, n)
+    for i in range(len(recipes)) :
+        for j in range(i+1, len(recipes)) :
+            file1 = filenames[i]
+            file2 = filenames[j]
+            hmm1 = ''.join([str(int(state)) for state in list(all_recipes_states[i])])
+            hmm2 = ''.join([str(int(state)) for state in list(all_recipes_states[j])])
+            gt1 = ''.join([str(int(state)) for state in list(ground_truth_str_sequences[i])])
+            gt2 = ''.join([str(int(state)) for state in list(ground_truth_str_sequences[j])])
+            print file1, ',', file2, ',', int(editdistance.eval(hmm1, hmm2)), ',', int(editdistance.eval(gt1, gt2))
+        
+    #dist_list = get_least_edit_distance(all_recipes_states, ground_truth_str_sequences, n)
     
-    for (recipe, filename, dist) in zip(recipes, filenames, dist_list) :
-        print filename, ',', dist, ',', len(recipe) 
+    #for (recipe, filename, dist) in zip(recipes, filenames, dist_list) :
+        #print filename, ',', dist, ',', len(recipe) 
         
 def basic_test() :
     observations = [[['a', 'cat'],['hello']],[['it', 'is', 'warm'],['a', 'dog'],['hello']]]
@@ -144,16 +157,17 @@ def test():
     (recipes, filenames, orig_recipe_texts) = preprocess(test_recipes_dirs)
     filenames_with_recipes = zip(filenames, recipes)
     filenames_with_recipes.sort()
-    for (filename, recipe) in filenames_with_recipes :
-        print filename, ':',  hmm.forwardbackward(recipe, cache=True)    
+    #for (filename, recipe) in filenames_with_recipes :
+        #print filename, ':',  hmm.forwardbackward(recipe, cache=True)    
     
-    #for (recipe, orig_text) in zip(recipes, orig_recipe_texts) :
-        #states =  hmm.decode(recipe)
-        #lines = orig_text
-        #output = zip(states, lines)
-        #for (state, line) in output :
-            #print state, ' : ', line
-        #print '-------------------------------------------------'    
+    for (recipe, orig_text) in zip(recipes, orig_recipe_texts) :
+        #print recipe
+        states =  hmm.decode(recipe)
+        lines = orig_text
+        output = zip(states, lines)
+        for (state, line) in output :
+            print state, ' : ', line
+        print '-------------------------------------------------'    
     
     #print "uni", hmm.uni
     #print "bi", hmm.bi
@@ -164,6 +178,6 @@ def test_baseline() :
 if __name__ == '__main__' :
     #print map_states('01234', '56789', '12341')
     #print get_least_edit_distance('01234', '12340', 5)
-    test_sequence_alignment()
-    #test()
+    #test_sequence_alignment()
+    test()
     #test_baseline()

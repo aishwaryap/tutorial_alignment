@@ -1,0 +1,235 @@
+recipes_dir =  ../../../train_pbnj
+Preprocessing  ../../../train_pbnj/3.txt
+Preprocessing  ../../../train_pbnj/6.txt
+Preprocessing  ../../../train_pbnj/2.txt
+Preprocessing  ../../../train_pbnj/8.txt
+Preprocessing  ../../../train_pbnj/0.txt
+Preprocessing  ../../../train_pbnj/4.txt
+Preprocessing  ../../../train_pbnj/9.txt
+Preprocessing  ../../../train_pbnj/1.txt
+Preprocessing  ../../../train_pbnj/7.txt
+Preprocessing  ../../../train_pbnj/5.txt
+[[('take',), ('open',), ('twist',), ('pick',), ('handle',), ('insert',), ('withdraw',), ('run', 'it'), ('take',), ('meet',)], [('form', 'sandwich')], [('take',), ('put',), ('take',), ('put',)], [('give',), ('be',), ('begin',), ('lay',), ('pick',), ('unscrew', 'top'), ('remove',), ('set', 'top'), ('hold',), ('pick', 'utensil'), ('grab',), ('put',), ('be',), ('pick',), ('be',), ('maintain',), ('open',), ('keep', 'slice'), ('apply', 'knife'), ('spread', 'butter'), ('be',), ('distribute',), ('lay',), ('set', 'knife'), ('use',), ('be',), ('pick', 'jar'), ('open', 'jar'), ('set',), ('pick', 'w'), ('insert',), ('scoop', 'portion'), ('be',), ('practice', 'caution'), ('hold',), ('set', 'jar'), ('pick',), ('be',), ('do',), ('have', 'butter'), ('hold',), ('apply', 'jelly'), ('spread', 'jelly'), ('be',), ('distribute',), ('set', 'knife'), ('hold',), ('pick', 'slice'), ('be',), ('pick', 'it'), ('do',), ('stick', 'fingers'), ('adjust',), ('be',), ('hold',), ('make',), ('be',), ('face',), ('bring',), ('clap',), ('maintain',), ('clasp',), ('rotate', 'hands'), ('remove',), ('have', 'it')], [('use',), ('scoop', 'dollop'), ('spread', 'it'), ('desire',), ('put',), ('prevent', 'bread'), ('get',), ('be',), ('prepare',), ('use',), ('scoop', 'amount'), ('desire',), ('spread',), ('put',), ('lead',), ('spew',), ('take',), ('flip', 'it'), ('have', 'sandwich')], [('spread',), ('use',)], [('take',), ('take',), ('scrape', 'butter'), ('spread',), ('do',), ('cover', 'surface'), ('be',), ('cover', 'surface'), ('take',), ('replace',), ('line',), ('take', 'end'), ('cut',)], [('collect',), ('want', 'butter'), ('want',), ('grab', 'butter'), ('enhance', 'flavor'), ('use',), ('soften', 'it'), ('make',), ('spread',), ('want',), ('use', 'teaspoon'), ('avoid',), ('have',), ('run',), ('do', 'this'), ('be',), ('take',), ('press', 'them')], [('spread', 'butter'), ('use',), ('flip', 'slice'), ('close', 'sandwich'), ('serve',)], [('spread',), ('cover',)]]
+Completed preprocessing
+Train files : ['../../../train_pbnj/3.txt', '../../../train_pbnj/6.txt', '../../../train_pbnj/2.txt', '../../../train_pbnj/8.txt', '../../../train_pbnj/0.txt', '../../../train_pbnj/4.txt', '../../../train_pbnj/9.txt', '../../../train_pbnj/1.txt', '../../../train_pbnj/7.txt', '../../../train_pbnj/5.txt']
+pi =  [ 0.35024176  0.16300189  0.13132448  0.35543187]
+a =  [[ 0.19682409  0.0971326   0.28142883  0.42461447]
+ [ 0.36078123  0.05452097  0.23885289  0.34584491]
+ [ 0.34682262  0.03646511  0.42221008  0.1945022 ]
+ [ 0.05994681  0.16408438  0.37374145  0.40222736]]
+Iteration 0
+prob_old =  8.27051101215e-15
+prob_new =  -569.834900486
+Iteration 1
+prob_old =  -569.834900486
+prob_new =  -568.402130779
+Iteration 2
+prob_old =  -568.402130779
+prob_new =  -565.351413176
+Iteration 3
+prob_old =  -565.351413176
+prob_new =  -558.801065735
+Iteration 4
+prob_old =  -558.801065735
+prob_new =  -551.901766989
+Iteration 5
+prob_old =  -551.901766989
+prob_new =  -549.959273207
+Iteration 6
+prob_old =  -549.959273207
+prob_new =  -549.476785795
+Iteration 7
+prob_old =  -549.476785795
+prob_new =  -548.895807664
+Iteration 8
+prob_old =  -548.895807664
+prob_new =  -548.765462884
+Iteration 9
+prob_old =  -548.765462884
+prob_new =  -548.896510531
+Iteration 10
+prob_old =  -548.896510531
+prob_new =  -548.916093866
+Iteration 11
+prob_old =  -548.916093866
+prob_new =  -548.918003669
+Iteration 12
+prob_old =  -548.918003669
+prob_new =  -548.918342053
+Iteration 13
+prob_old =  -548.918342053
+prob_new =  -548.918542528
+Iteration 14
+prob_old =  -548.918542528
+prob_new =  -548.918862626
+Iteration 15
+prob_old =  -548.918862626
+prob_new =  -548.919289452
+Iteration 16
+prob_old =  -548.919289452
+prob_new =  -548.919776432
+Iteration 17
+prob_old =  -548.919776432
+prob_new =  -548.920272958
+Iteration 18
+prob_old =  -548.920272958
+prob_new =  -548.920732882
+Iteration 19
+prob_old =  -548.920732882
+prob_new =  -548.921117742
+Iteration 20
+prob_old =  -548.921117742
+prob_new =  -548.921397699
+Iteration 21
+prob_old =  -548.921397699
+prob_new =  -548.921548749
+Iteration 22
+prob_old =  -548.921548749
+prob_new =  -548.921551412
+recipes_dir =  ../../../groundTruth/pbnj
+Preprocessing  ../../../groundTruth/pbnj/12.txt
+Preprocessing  ../../../groundTruth/pbnj/11.txt
+Preprocessing  ../../../groundTruth/pbnj/18.txt
+Preprocessing  ../../../groundTruth/pbnj/13.txt
+Preprocessing  ../../../groundTruth/pbnj/15.txt
+Preprocessing  ../../../groundTruth/pbnj/14.txt
+Preprocessing  ../../../groundTruth/pbnj/16.txt
+Preprocessing  ../../../groundTruth/pbnj/17.txt
+Preprocessing  ../../../groundTruth/pbnj/19.txt
+Preprocessing  ../../../groundTruth/pbnj/10.txt
+[[('take',), ('use',), ('remove',), ('spread', 'it'), ('put',), ('face',), ('jelly',), ('match',), ('be',), ('create',), ('stack',), ('make', 'slices')], [('open',), ('remove', 'slices'), ('lay',), ('remove',), ('have',), ('want',), ('remove',), ('need',), ('remove',), ('have',), ('want',), ('remove',), ('need',), ('face',), ('enjoy',)], [('use',), ('spread', 'coat'), ('be',), ('cover',), ('spread', 'coat'), ('apply',), ('put', 'one'), ('place', 'slice')], [('remove',), ('cut',), ('open',), ('be',), ('remove',), ('use',), ('crush',), ('remove',), ('use',), ('crush',), ('take',), ('open', 'jar'), ('follow',), ('hold',), ('do',), ('exit', 'jar'), ('be',), ('hold',), ('take',), ('distribute', 'jelly'), ('use',), ('escape',), ('use',), ('take',), ('open', 'jar'), ('follow',), ('hold',), ('do',), ('exit', 'jar'), ('be',), ('hold',), ('take',), ('distribute', 'butter'), ('use',), ('escape',), ('use',), ('pick', 'slices'), ('do',), ('pick', 'slices'), ('touch',), ('use', 'crust')], [('be',), ('accomplish',), ('remove',), ('be',), ('hold',), ('hold',), ('lay',), ('remove',), ('be',), ('accomplish',), ('place',), ('turn',), ('apply',), ('be',), ('loosen',), ('remove',), ('lift',), ('withdraw',), ('be',), ('accomplish',), ('hold',), ('be',), ('expose',), ('expose',), ('gather', 'amount'), ('remove',), ('create',), ('be',), ('lose',), ('use',), ('apply', 'butter'), ('place',), ('be',), ('withdraw',), ('expose',), ('do',), ('permit', 'butter'), ('touch', 'crust'), ('make',), ('handle',), ('expose',), ('be',), ('apply',), ('note',), ('permit',), ('touch', 'crust'), ('use',), ('be',), ('wash',), ('open',), ('use',), ('be',), ('require',), ('open', 'jar'), ('retrieve',), ('gather',), ('use',), ('describe',), ('use',), ('be',), ('avoid', 'area'), ('maintain', 'fingers'), ('expose',), ('be',), ('avoid', 'area'), ('set',), ('use',), ('be',), ('retrieve',), ('pick',), ('have',), ('be',), ('spread',), ('be',), ('do',), ('pick',), ('keep',), ('be',), ('hold',), ('face',), ('place', 'surface'), ('hold',), ('be',)], [('need',), ('take', 'pieces'), ('spread', 'layer'), ('use',), ('use',), ('depend',), ('put', 'pieces'), ('match',), ('have', 'it'), ('eat',)], [('be',), ('remove', 'slices'), ('hold',), ('handle',), ('use', 'end'), ('remove', 'amount'), ('desire',), ('hold',), ('handle',), ('spread', 'butter'), ('use',), ('be',), ('complete',), ('set', 'knife'), ('take',), ('put', 'side'), ('be',), ('combine',), ('face',), ('desire',), ('use', 'edge'), ('cut', 'sandwich'), ('cut', 'sandwich'), ('replace',), ('wash', 'knife'), ('be',), ('enjoy',)], [('need', 'knife'), ('take',), ('lay', 'them'), ('use',), ('spread', 'butter'), ('have',), ('wipe',), ('open',), ('give',), ('take',), ('lay', 'it'), ('align',), ('take',), ('cut', 'sandwich')], [('put',)], [('take',), ('remove',), ('wrap',), ('be',), ('lay', 'them'), ('take',), ('unscrew',), ('pick',), ('prefer', 'knife'), ('scoop', 'portion'), ('cover', 'side'), ('spread',), ('put',), ('be',), ('hold',), ('be',), ('lie',), ('bring', 'utensil'), ('apply', 'butter'), ('spread',), ('be',), ('face',), ('continue',), ('be',), ('cover',), ('face',), ('take', 'container'), ('unscrew',), ('pick',), ('prefer', 'spoon'), ('scoop', 'portion'), ('cover', 'side'), ('spread',), ('put',), ('be',), ('hold',), ('position', 'it'), ('be',), ('lie',), ('bring', 'utensil'), ('apply', 'jelly'), ('spread',), ('be',), ('face',), ('continue',), ('be',), ('cover',), ('leave', 'piece'), ('be',), ('pick', 'piece'), ('take',), ('get', 'butter'), ('be',), ('lie',), ('have', 'piece'), ('bring', 'hand'), ('hold',), ('rotate', 'wrist'), ('be',), ('face',), ('butter-covered',), ('make',), ('align', 'pieces'), ('match',), ('corner',), ('corner',), ('do',), ('have', 'corners'), ('place',), ('correspond',), ('stick',)]]
+0.0  :  1 | Begin by taking out two slices of bread .
+3.0  :  3 | Using a knife or spoon , remove about a tablespoon 's worth -LRB- or however much you so desire -RRB- of jelly from the jar and spread it out evenly on one side of one slice of bread .
+3.0  :  Put it aside , jelly side up .
+3.0  :  2 | Repeat this procedure with the peanut butter on one side of the other slice of bread .
+3.0  :  4 | Place the peanut-buttered slice of bread face down directly on top of the jellied slice of bread , matching up the slices of bread as if one were creating a nice , neat stack .
+3.0  :  4 | Gently press down to make the the two slices of bread stick to each other .
+-------------------------------------------------
+1.0  :  1 | Open the bread and remove two slices , laying them side by side .
+3.0  :  2 | Open peanut butter jar 2 | Remove some peanut butter with the knife 2 | Spread the peanut butter onto the bread until you have as much as you want , removing more from the jar as needed .
+3.0  :  3 | Open jelly jar .
+3.0  :  3 | Remove a table spoonful of jelly .
+3.0  :  3 | Spread the jelly on the bread until you have as much as you want , removing more from the jar as needed .
+3.0  :  4 | Place the two slices together , peanut butter and jelly facing inwards , press down slightly , and enjoy
+-------------------------------------------------
+0.0  :  2 | Using a spreading knife , spread an even coat of peanut butter on one side of each slice of bread .
+3.0  :  3 | When the bread is evenly covered , spread an even coat of jelly atop the peanut butter .
+3.0  :  4 | After applying the jelly , put one of the slices on a plate -LRB- jelly side up -RRB- and place the other slice on top of the first -LRB- jelly side down -RRB- .
+-------------------------------------------------
+1.0  :  1 | Place bread parallel to table top .
+3.0  :  1 | Remove twist tie from bread by cutting the twist tie with scissors .
+3.0  :  1 | Open the bag the bread is in from the open end .
+3.0  :  1 | Place hand inside of bread bag .
+3.0  :  1 | Remove slice of bread using hand without crushing the bread .
+3.0  :  1 | Remove slice of bread using without crushing the bread .
+3.0  :  1 | Place slices of bread parallel to table top side by side .
+3.0  :  3 | Take jar of jelly in hand .
+3.0  :  3 | Use opposite hand to open jar by following instruction on jar .
+3.0  :  3 | Hold jelly in left hand in a fashion that the jelly does not exit the jar except by way of knife which is held in the right hand .
+3.0  :  3 | Take a unit of jelly on knife from jelly jar and place unit of jelly in the middle of one of the pieces of bread .
+3.0  :  3 | Evenly distribute the jelly across bread using the knife .
+3.0  :  3 | Fashion the lid of jelly back on to jar in a manner that no jelly escapes from the jar .
+3.0  :  3 | Discard used knife into cleaning bin .
+3.0  :  2 | Take jar of peanut butter in hand .
+3.0  :  2 | Use opposite hand to open jar by following instruction on jar .
+3.0  :  2 | Hold peanut butter in left hand in a fashion that the peanut butter does not exit the jar except by way of knife which is held in the right hand .
+3.0  :  2 | Take a unit of peanut butter on knife from peanut butter jar and place unit of peanut butter in the middle of one of the pieces of bread .
+3.0  :  2 | Evenly distribute the peanut butter across bread using the knife .
+3.0  :  2 | Fashion the lid of peanut butter back on to jar in a manner that no peanut butter escapes from the jar .
+3.0  :  2 | Discard second used knife into cleaning bin .
+3.0  :  4 | Pick up both slices of bread however , do not pick up the slices of bread touching the peanut butter or jelly therefore use the crust of the bread as the lifting mechanism .
+3.0  :  4 | Place the jelly and peanut butter sides of the bread gently together without spilling any peanut butter or jelly on the ground .
+-------------------------------------------------
+1.0  :  1 | Lay the two slices of bread beside one another in front of you .
+3.0  :  1 | This procedure is accomplished by removing any two bread slices from the container in which they were previously held .
+3.0  :  1 | Hold one slice in your left hand , one in your right hand .
+3.0  :  Lay the slices of bread side-by-side on a table or other flat surface .
+3.0  :  2 | Remove the lid from the peanut butter jar .
+3.0  :  2 | This prodedure is accomplished by placing the fingers about the lid at equal spaces around the lid .
+3.0  :  2 | Turn the lid while applying inward pressure with the fingers in a direction counter-clockwise until the jar lid is loosened to its maximum potential .
+3.0  :  2 | Remove the lid at this juncture by lifting upward .
+3.0  :  Place the lid in a place convenient to its retrieval .
+3.0  :  2 | Withdraw some peanut butter from its jar .
+3.0  :  This procedure is accomplished by holding either butter knife in the hand such that the blade , or flat end , is exposed .
+3.0  :  2 | Place the exposed -LRB- flat -RRB- end into the open end of the jar , and with a slow horizontal movement , gather a desirable amount of peanut butter on the knife 's flat surface .
+3.0  :  2 | Remove knife from jar near the center of the circle created by the open area such that no peanut butter is lost .
+3.0  :  2 | Using the knife , apply the peanut butter to either slice of bread by placing the surface with which the peanut butter was withdrawn to the exposed surface of the bread slice .
+3.0  :  2 | Do not permit the peanut butter to touch the `` crust , '' as this will make the sandwich more difficult to handle at a later time .
+3.0  :  2 | Spread the peanut butter along the exposed bread surface upon which it was previously applied , carefully noting the previous warning about not permitting the peanut butter to touch the `` crust . ''
+3.0  :  2 | Place the previously used knife aside such that it can be washed at a later time .
+3.0  :  3 | Open the jelly jar using a procedure similar to the one for the peanut butter .
+3.0  :  3 | More force may be required to open the jelly jar , though .
+3.0  :  3 | Retrieve the other knife for use in the jelly .
+3.0  :  3 | Use the new butter knife to gather jelly from the jar , using a procedure similar to the one described in Step 4 .
+3.0  :  3 | Place the jelly on the slice of bread not previously used , again being careful to avoid the `` crust '' area to maintain clean fingers , if possible .
+3.0  :  3 | Spread the jelly on the second slice on the exposed bread surface of the second slice , again being careful to avoid the `` crust '' area .
+3.0  :  3 | Set the knife used for the jelly aside so that it may be retrieved at a later time .
+3.0  :  4 | Pick up the slice of bread on which the peanut butter has been spread .
+3.0  :  4 | This is done by picking the bread up in a manner keeping the peanut-butter surface away from your skin at all times .
+3.0  :  4 | Being sure that the peanut butter surface on the held slice faces only the jelly surface on the stationary slice , place the peanut butter surface on the held slice against the jelly surface on the stationary slice and release .
+3.0  :  4 | Line up the corners of each slice of bread such that they are flush with one another .
+-------------------------------------------------
+1.0  :  3 | You need to take two pieces of the bread and spread a layer of peanut butter on one piece and a layer of jelly on the other piece using your spreading utensil .
+3.0  :  3 | Note that the amount of peanut butter and jelly you use depends on your particular taste .
+3.0  :  4 | Finally , you put the two pieces of bread together - the peanut butter matching up with the jelly , and there you have it , a peanut butter and jelly sandwich - ready for eating !
+-------------------------------------------------
+1.0  :  1 | Open wrapping -LRB- if bread is still in packaging -RRB- around loaf of bread and remove two slices .
+3.0  :  1 | Place slices on their side -LRB- not on edge -RRB- on a flat surface .
+3.0  :  2 | Open jar of peanut butter .
+3.0  :  2 | Hold the handle of the butter knife , and use the flat end to remove a small amount -LRB- or as much as desired -RRB- of peanut butter from the jar .
+3.0  :  2 | Still holding the handle of the knife , spread the peanut butter from the end of the knife evenly over one side of one piece of bread .
+3.0  :  3 | Repeat steps 3-5 using the jelly and the second slice of bread .
+3.0  :  3 | When application of peanut butter and jelly is completed , set down the knife .
+3.0  :  4 | Take the two slices of bread and put the peanut butter side of the one and the jelly side of the other together .
+3.0  :  4 | The sides of bread with peanut butter or jelly spread on them should be combined in the middle of the sandwich , with the plain sides of the slices facing outwards .
+3.0  :  4 | If desired , use the cutting edge of the butter knife to cut the sandwich in half , quarters etc. 3 | Replace the lids on the peanut butter and jelly jars and wash the knife .
+3.0  :  4 | Your sandwich is now ready to enjoy .
+-------------------------------------------------
+1.0  :  1 | Along with the groceries , you will need a butter knife for spreading , and a plate .
+3.0  :  1 | Take two pieces of bread from the bag and lay them on the plate .
+3.0  :  2 | Open peanut butter .
+3.0  :  2 | Using the knife , spread the peanut butter on one slice of bread until the bread has a coating layer on it .
+3.0  :  2 | Replace top on jar .
+3.0  :  Wipe off knife .
+3.0  :  3 | Open the jelly .
+3.0  :  3 | Spread jelly on the other slice of bread , once again giving it a generous coating .
+3.0  :  3 | Replace top on jar .
+3.0  :  4 | Take the slice of bread with jelly and lay it on top of the peanut buttered piece , aligning the sides and corners .
+3.0  :  4 | Take the knife and cut the sandwich , either widthwise or diagonally .
+3.0  :  4 | Put peanut butter and jelly back in refrigerator and bread away .
+-------------------------------------------------
+1.0  :  1 | Put two pieces of bread on plate .
+-------------------------------------------------
+0.0  :  1 | Take the two slices of bread -LRB- remove them from any packaging or wrapping they may be in -RRB- and lay them down flat and side by side on the aforementioned surface .
+3.0  :  2 | Take the container of peanut butter .
+3.0  :  2 | open it -LRB- usually by unscrewing the lid counter-clockwise -RRB- .
+3.0  :  2 | place both the lid and the now open container back down , side by side , on the surface .
+3.0  :  2 | Pick up a utensil -LRB- i prefer a butter knife -RRB- in your dominant hand .
+3.0  :  2 | pick up the open container of peanut butter in your other hand .
+3.0  :  2 | insert the utensil into the jar and scoop out a portion of peanut butter large enough to cover one side of one of your pieces of bread when spread flat across it .
+3.0  :  2 | Put the container of peanut butter back down on the surface .
+3.0  :  2 | pick up one of your bread slices in your non-dominant hand .
+3.0  :  2 | -LRB- your dominant one should still be holding the utensil with the peanut butter on it -RRB- position the slice of bread so that it is lying flat across your palm -LRB- still the non-dominant one -RRB- .
+3.0  :  2 | slowly bring the utensil with the peanut butter on it over to the piece of bread in your non-dominant hand and apply the peanut butter as evenly as possible by spreading it in firm but gentle strokes across the side of the bread that is facing upward in your hand .
+3.0  :  2 | continue until that side of the bread is evenly covered in peanut butter .
+3.0  :  2 | Place the utensil down on the surface .
+3.0  :  2 | place the peanut butter-covered slice of bread down on the surface with the peanut butter side facing up !
+3.0  :  3 | Now take the container of jelly .
+3.0  :  3 | open it -LRB- usually by unscrewing the lid counter-clockwise -RRB- .
+3.0  :  3 | place both the lid and the now open container back down on the surface , side by side .
+3.0  :  3 | Pick up a utensil -LRB- i prefer a spoon -RRB- in your dominant hand .
+3.0  :  3 | pick up the open container of jelly in your other hand .
+3.0  :  3 | insert the utensil into the jar and scoop out a portion of jelly large enough to cover one side of one piece of bread when spread flat across it .
+3.0  :  3 | Put the container of jelly down on the surface .
+3.0  :  3 | pick up one piece of bread in your non-dominant hand -LRB- your dominant one should still be holding the utensil with the jelly on it -RRB- and position it so it is lying flat across your palm .
+3.0  :  3 | slowly bring the utensil with the jelly on it over to the piece of bread in your non-dominant hand and apply the jelly as evenly as possible by spreading it in firm but gentle strokes across the side of the bread that is facing upward in your hand .
+3.0  :  3 | continue until that side of the bread is evenly covered in jelly .
+3.0  :  3 | Place the utensil down on the surface .
+3.0  :  3 | leave the now jelly-covered piece of bread in your hand exactly the way it is -LRB- jelly-side up -RRB- .
+3.0  :  4 | now pick up the peanut butter-covered piece of bread with your dominant hand , taking care not to get peanut butter all over yourself .
+3.0  :  4 | position it so it is lying flat across the palm of your dominant hand , peanut butter-covered side up .
+3.0  :  4 | You should now have a jelly-covered piece of bread in your non-dominant hand -LRB- jelly side up -RRB- and a peanut butter-covered piece of bread in your dominant hand -LRB- peanut butter side up -RRB- .
+3.0  :  4 | slowly bring your dominant hand closer to your non-dominant hand .
+3.0  :  holding onto the peanut-buttered piece of bread , rotate the wrist of your dominant arm until the two slices of bread are facing each other , jelly-side to peanut butter-side .
+3.0  :  4 | Place the slice of bread in your dominant hand -LRB- peanut butter-covered -RRB- on top of the slice in your non-dominant hand -LRB- jelly-covered -RRB- , peanut butter-side to jelly-side , making sure to align the two pieces of bread so that they match up perfectly shape-wise -LRB- usually corner to corner but if the bread slices do not have corners , just place them together so the shapes correspond , with no corners or edges sticking out -RRB- .
+-------------------------------------------------
